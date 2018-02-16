@@ -3,42 +3,71 @@
 <head>
 	<title>CrystalsCollector Game</title>
 	<link rel="stylesheet" href="assets/css/reset.css">
-	<link rel="stylesheet" href="assets/css/style.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+	<link rel="stylesheet" href="assets/css/style-2.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 	<script src="assets/javascript/game.js"></script>
 </head>
 <body>
 	<div class="container">
-		<div id="row-1">
-			<h1 class="cc-title">CrystalsCollector!</h1>
+		<div id="row-1" class="row mb-3">
+			<h1 class="col display-4 p-2 text-center">CrystalsCollector!</h1>
 		</div>
-		<div id="row-2">
-			<p>You will be give a random number at the start of the game.</p>
-			<p>There are four crystals below. By clicking on a crystal you will add a specific amount of points to your total score.</p>
-			<p>You win the game by matching your total score to random number, you lose the game if your total score goes above the random number.</p>
-			<p>The value of each crsytal is hidden from you until you click on it.</p>
-			<p>Each time when the game starts, the game will change the values of each crystal</p>
-		</div>
-		<div id="row-3">
-			<div id="target-number">39</div>
-			<div id="wins-and-losses">
-				<p id="wins">Wins: 0</p>
-				<p id="losses">Losses: 0</p>
+		<div id="row-2" class="row mb-3">
+			<div class="col-12">
+				<div class="card">
+				  <div class="card-header text-center">
+				  	Instructions
+				  	<span class="hide-show float-right">Hide</span>
+				  </div>
+				  <div class="card-body">
+					<p>You will be give a random number at the start of the game. There are four crystals below. By clicking on a crystal you will add a specific amount of points to your total score. You win the game by matching your total score to random number, you lose the game if your total score goes above the random number. The value of each crsytal is hidden from you until you click on it. Each time when the game starts, the game will change the values of each crystal.</p>
+				  </div>
+				</div>	
 			</div>
 		</div>
-		<div id="row-4">
-			<ul class="gems">
-				<li id="option-1" class="crystal" data-value=""></li>
-				<li id="option-2" class="crystal" data-value=""></li>
-				<li id="option-3" class="crystal" data-value=""></li>
-				<li id="option-4" class="crystal" data-value=""></li>
-			</ul>
+		<div id="row-3" class="row mb-3 flex-column flex-lg-row">
+			<div class="col-12 col-lg-6 row">
+				<div class="col-6 mb-3 mb-lg-0">
+					<div class="card h-100 p-0 mr-lg-3">
+					  <div class="card-header text-center">Random Number</div>
+					  <div id="target-number" class="card-body text-center">
+						39
+					  </div>
+					</div>	
+				</div>
+				<div class="col-6 mb-3 mb-lg-0">
+					<div class="card h-100 p-0 mr-lg-3">
+					  <div class="card-header text-center">Your Score</div>
+					  <div id="score" class="card-body text-center">
+						0
+					  </div>
+					</div>	
+				</div>	
+			</div>
+			<div class="col-12 col-lg-6">
+				<div class="card-header text-center">Crystals</div>
+				<div id="gem-card" class="card-body text-center">
+					<ul class="gems mb-0">
+						<li id="option-1" class="crystal ml-3 mr-3" data-value=""></li>
+						<li id="option-2" class="crystal ml-3 mr-3" data-value=""></li>
+						<li id="option-3" class="crystal ml-3 mr-3" data-value=""></li>
+						<li id="option-4" class="crystal ml-3 mr-3" data-value=""></li>
+					</ul>
+				</div>	
+			</div>
+		</div>
+		<div id="row-4" class="row mb-3">
+			<div class="card col-12 p-0 mr-3">
+			  <div class="card-header text-center">Win/Loss Record</div>
+			  <div id="record" class="card-body text-center">
+				<span id="wins" class="mr-3">Wins: 0</span>
+				<span id="losses">Losses: 0</span>
+			  </div>
+			</div>
 		</div>
 		<div id="row-5">
-			<div class="score-header">
-				Your total score is:
-			</div>
-			<div id="score" class="score">0</div>			
+						
 		</div>
 		<nav class="menu"></nav>
 	</div>
