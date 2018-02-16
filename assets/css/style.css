@@ -1,0 +1,107 @@
+* {
+	box-sizing: border-box;
+}
+
+body {
+	background-image: url(../images/circles-dark.png);
+	margin: 5px;
+}
+
+p {
+	margin: 15px 0;
+}
+
+.container {
+	display: flex;
+	flex-flow: column nowrap;
+	width: 50%;
+}
+
+.container>div {
+	margin-bottom: 5px;
+}
+
+#row-1 .cc-title {
+	display: inline-block;
+	background-color: #5f391d;
+	color: #fff;
+	font-size: 20px;
+	padding: 20px 0;
+}
+
+#row-2 {
+	background-color: #fdd8d3;
+	color: #06a206;
+	font-weight: 800;
+	padding-bottom: 50px;
+}
+
+#row-3 {
+	display: flex;
+}
+
+#target-number {
+	display: inline-block;
+	background-color: #10b710;
+	width: 200px;
+	height: 100px;
+	margin-right: 5px;
+	font-size: 30px;
+}
+
+#wins-and-losses {
+	background-color: cyan;
+	height: 100px;
+	padding: 5px;
+}
+
+.gems {
+	display: flex;
+	flex-flow: row nowrap;
+
+}
+
+.crystal {
+	width: 50px;
+	height: 50px;
+	background-repeat: no-repeat;
+	background-image: url(../images/gemcomp2.gif);
+	background-size: 200px 100px;
+	margin-right: 5px;
+	cursor: pointer;
+}
+
+#option-1 {
+	transform: rotate(90deg);
+}
+
+#option-2 {
+	background-position: -50px 0;
+}
+
+#option-3 {
+	background-position: -50px -50px;
+	transform: rotate(90deg);
+}
+
+#option-4 {
+	background-position: -100px -50px;
+}
+
+.score-header,
+.score {
+	background-color: teal;
+	color: #fff;
+	width: 200px;
+}
+
+.score-header {
+	padding: 5px;
+	margin-bottom: 5px;
+}
+
+.score {
+	padding: 10px 5px;
+	height: 100px;
+	font-size: 30px;
+}

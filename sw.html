@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>CrystalsCollector Game</title>
+	<link rel="stylesheet" href="assets/css/reset.css">
+	<!-- <link rel="stylesheet" href="assets/css/style.css"> -->
+	<link rel="stylesheet" href="assets/css/sw.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<script src="assets/javascript/game.js"></script>
+</head>
+<body>
+	<div class="container">
+		<div id="row-1">
+			<h1>Star Wars RPG!</h1>
+			<ul class="character-list">
+				<li id="obi" class="character available">
+					<div class="character-name">Obi-Wan Kenobi</div>
+					<img src="assets/images/obiwan.jpg">
+					<div class="character-hp">120</div>
+				</li>
+				<li id="luke" class="character available">
+					<div class="character-name">Luke Skywalker</div>
+					<img src="assets/images/luke.jpg">
+					<div class="character-hp">100</div>
+				</li>
+				<li id="sidious" class="character available">
+					<div class="character-name">Darth Sidious</div>
+					<img src="assets/images/sidious-2.jpg">
+					<div class="character-hp">150</div>
+				</li>
+				<li id="maul" class="character available">
+					<div class="character-name">Darth Maul</div>
+					<img src="assets/images/maul.jpg">
+					<div class="character-hp">180</div>
+				</li>
+			</ul>
+
+		</div>
+		<div id="row-2">
+			<h3>Your Character</h3>
+			<!-- Clone chosen character here -->
+			<ul class="player-holder"></ul>
+
+		</div>
+		<div id="row-3">
+			<h3>Enemies Available To Attack</h3>
+			<!-- Clone non-chosen characters -->
+			<ul class="enemies-holder"></ul>
+		</div>
+		<div id="row-4">
+			<h3>Fight Section</h3>
+			<button id="btn-attack">Attack</button>
+		</div>
+		<div id="row-5">
+			<h3>Defender</h3>
+			<ul class="defender-holder"></ul>
+			<!-- Clone chosen Defender -->
+			<!-- After attack has been clicked, display
+				<p>You attacked [character name] for [player attack damage] damage</p>
+				<p>[character name] attacked you back for [counter attack damage] damage.</p>
+			
+			 -->
+		</div>
+		<nav class="menu"></nav>
+	</div>
+
+</body>
+</html>

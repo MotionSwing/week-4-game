@@ -1,0 +1,72 @@
+/*-------------------*/
+/*----Star Wars -----*/
+/*-------------------*/
+* {
+	box-sizing: border-box;
+}
+
+body {
+	font-family: Consolas,serif;
+	padding: 10px;
+}
+
+h1 {
+	font-size: 40px;
+	text-align: right;
+	margin-right: 100px;
+}
+
+h3 {
+	font-size: 28px;
+}
+
+.character-list {
+	display: flex;
+}
+
+.character {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	font-size: 12px;
+	border: 2px solid #000;
+	background-color: #fff;
+	padding: 0 5px;
+	/*cursor: pointer;*/
+}
+
+.available {
+	border: 2px solid green;
+	background-color: #fff;
+	cursor: pointer;
+}
+
+.character img {
+	width: 150px;
+	height: 75px;
+	margin: 5px;	
+}
+
+.enemy {
+	background-color: #f00;
+	border: 2px solid #000;
+	cursor: pointer;
+}
+
+.defender {
+	background-color: #000;
+	border: 2px solid green;
+	color: #fff;
+}
+
+
+.player-holder,
+.enemies-holder,
+.defender-holder {
+	display: flex;
+}
+
+.player-holder {
+	height: 113px;
+}
