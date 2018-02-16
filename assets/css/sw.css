@@ -33,13 +33,13 @@ h3 {
 	border: 2px solid #000;
 	background-color: #fff;
 	padding: 0 5px;
-	/*cursor: pointer;*/
+	cursor: pointer;
+	max-width: 174px;
 }
 
 .available {
 	border: 2px solid #00e700;
 	background-color: #fff;
-	cursor: pointer;
 }
 
 .character img {
@@ -51,7 +51,6 @@ h3 {
 .enemy {
 	background-color: #f00;
 	border: 2px solid #000;
-	cursor: pointer;
 }
 
 .defender {
@@ -61,12 +60,17 @@ h3 {
 }
 
 
-.player-holder,
-.enemies-holder,
-.defender-holder {
+.player-area,
+.enemies-area,
+.defender-area {
 	display: flex;
 }
 
-.player-holder {
+.player-area {
+	height: 113px;
+}
+
+.defender-area {
+	flex-flow: column nowrap;
 	height: 113px;
 }

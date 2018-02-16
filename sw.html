@@ -13,39 +13,37 @@
 		<div id="row-1">
 			<h1>Star Wars RPG!</h1>
 			<ul class="character-list">
-				<li id="obi" class="character available">
-					<div class="character-name">Obi-Wan Kenobi</div>
+				<li id="obi" class="character available" data-attack-power="8" data-counter-attack-power="10">
+					<div class="name">Obi-Wan Kenobi</div>
 					<img src="assets/images/obiwan.jpg">
-					<div class="character-hp">120</div>
+					<div class="hp" data-hp="120">120</div>
 				</li>
-				<li id="luke" class="character available">
-					<div class="character-name">Luke Skywalker</div>
+				<li id="luke" class="character available" data-attack-power="15" data-counter-attack-power="5">
+					<div class="name">Luke Skywalker</div>
 					<img src="assets/images/luke.jpg">
-					<div class="character-hp">100</div>
+					<div class="hp" data-hp="100">100</div>
 				</li>
-				<li id="sidious" class="character available">
-					<div class="character-name">Darth Sidious</div>
+				<li id="sidious" class="character available" data-attack-power="10" data-counter-attack-power="20">
+					<div class="name">Darth Sidious</div>
 					<img src="assets/images/sidious-2.jpg">
-					<div class="character-hp">150</div>
+					<div class="hp" data-hp="150">150</div>
 				</li>
-				<li id="maul" class="character available">
-					<div class="character-name">Darth Maul</div>
+				<li id="maul" class="character available" data-attack-power="12" data-counter-attack-power="25">
+					<div class="name">Darth Maul</div>
 					<img src="assets/images/maul.jpg">
-					<div class="character-hp">180</div>
+					<div class="hp" data-hp="180">180</div>
 				</li>
 			</ul>
 
 		</div>
 		<div id="row-2">
 			<h3>Your Character</h3>
-			<!-- Clone chosen character here -->
-			<ul class="player-holder"></ul>
+			<ul class="player-area"></ul>
 
 		</div>
 		<div id="row-3">
 			<h3>Enemies Available To Attack</h3>
-			<!-- Clone non-chosen characters -->
-			<ul class="enemies-holder"></ul>
+			<ul class="enemies-area"></ul>
 		</div>
 		<div id="row-4">
 			<h3>Fight Section</h3>
@@ -53,13 +51,9 @@
 		</div>
 		<div id="row-5">
 			<h3>Defender</h3>
-			<ul class="defender-holder"></ul>
-			<!-- Clone chosen Defender -->
-			<!-- After attack has been clicked, display
-				<p>You attacked [character name] for [player attack damage] damage</p>
-				<p>[character name] attacked you back for [counter attack damage] damage.</p>
-			
-			 -->
+			<ul class="defender-area"></ul>
+			<p class="playerDamageText"></p>
+			<p class="defenderDamageText"></p>
 		</div>
 		<nav class="menu"></nav>
 	</div>

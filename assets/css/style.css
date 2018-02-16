@@ -1,107 +1,101 @@
-* {
-	box-sizing: border-box;
-}
+/*-------------------------*/
+/*----CrystalsCollector----*/
+/*-------------------------*/
 
-body {
-	background-image: url(../images/circles-dark.png);
-	margin: 5px;
-}
-
-p {
-	margin: 15px 0;
-}
-
-.container {
-	display: flex;
-	flex-flow: column nowrap;
-	width: 50%;
-}
-
-.container>div {
-	margin-bottom: 5px;
-}
-
-#row-1 .cc-title {
-	display: inline-block;
-	background-color: #5f391d;
+h1 {
+	background-color: #fff;
+	background-color: #d60ad6;
 	color: #fff;
-	font-size: 20px;
-	padding: 20px 0;
 }
 
-#row-2 {
-	background-color: #fdd8d3;
-	color: #06a206;
-	font-weight: 800;
-	padding-bottom: 50px;
-}
-
-#row-3 {
-	display: flex;
-}
-
-#target-number {
-	display: inline-block;
-	background-color: #10b710;
-	width: 200px;
-	height: 100px;
-	margin-right: 5px;
-	font-size: 30px;
-}
-
-#wins-and-losses {
-	background-color: cyan;
-	height: 100px;
-	padding: 5px;
+.card-header {
+	background-color: #d60ad6;
+	font-weight: 600;
+	color: #fff;
 }
 
 .gems {
 	display: flex;
 	flex-flow: row nowrap;
-
+	justify-content: center;
 }
 
 .crystal {
-	width: 50px;
-	height: 50px;
+	min-width: 63px;
+    width: 63px;
+    height: 72px;
 	background-repeat: no-repeat;
-	background-image: url(../images/gemcomp2.gif);
-	background-size: 200px 100px;
-	margin-right: 5px;
+	background-image: url(../images/gems.jpg);
+	background-size: 254px 194px;
 	cursor: pointer;
 }
 
 #option-1 {
-	transform: rotate(90deg);
+    background-position: 0 -12px;
 }
 
 #option-2 {
-	background-position: -50px 0;
+	background-position: -63px -13px;
 }
 
 #option-3 {
-	background-position: -50px -50px;
-	transform: rotate(90deg);
+	background-position: -2px -81px;
 }
 
 #option-4 {
-	background-position: -100px -50px;
+	background-position: -179px -90px;
 }
 
-.score-header,
-.score {
-	background-color: teal;
-	color: #fff;
-	width: 200px;
+#option-1:hover,
+#option-2:hover,
+#option-3:hover,
+#option-4:hover {
+	transform: scale(1.2);
+	animation: jiggle 750ms linear;
 }
 
-.score-header {
-	padding: 5px;
-	margin-bottom: 5px;
+@keyframes jiggle {
+	0% { transform: scale(1.2);	}
+	20% { transform: scale(1.2) rotate(-30deg); }
+	40% { transform: scale(1.2) rotate(30deg); }
+	60% { transform: scale(1.2) rotate(-10deg); }
+	80% { transform: scale(1.2) rotate(10deg); }
+	100% { transform: scale(1.2); }
 }
 
-.score {
-	padding: 10px 5px;
-	height: 100px;
-	font-size: 30px;
+#gem-card {
+	background-color: #fff;
+}
+
+#target-number,
+#score,
+#record {
+	font-size: 25px;
+}
+
+.hide-show {
+	position: relative;
+	color: #000;
+	padding: 2px 5px;
+	background-color: #eee;
+	border-radius: 5px;
+	cursor: pointer;
+	overflow: hidden;
+}
+
+.hide-show:hover {
+	box-shadow: 0 0 10px rgba(0,0,0,0.6), inset 0 0 10px rgba(0,0,0,0.6); 
+	color: #777;
+}
+
+.hide-show:hover::after {
+	content: '';
+	position: absolute;
+	width: 115%;
+	height: 100%;
+	background: linear-gradient(-8deg, transparent 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+	right: -5px;
+	top: 2px;
+	transform: rotate(-30deg);
+
 }

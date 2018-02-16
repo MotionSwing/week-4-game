@@ -230,51 +230,87 @@ $(document).ready(function() {
 	var starWarsRPG = {
 		title: "Star Wars RPG!",
 		bg_image: "xwing-bg.jpg",
-		characters: [
-			{
-				name: "Obi-Wan Kenobi",
-				image: "obiwan.jpg",
-				hp: 120,
-				attack_power: 5,
-				counter_attack_power: 5
-			},
-			{
-				name: "Luke Skywalker",
-				image: "luke.jpg",
-				hp_points: 100,
-				attack_power: 5,
-				counter_attack_power: 5
-			},
-			{
-				name: "Darth Sidious",
-				image: "sidious.jpg",
-				hp: 150,
-				attack_power: 5,
-				counter_attack_power: 5
-			},
-			{
-				name: "Darth Maul",
-				image: "maul.jpg",
-				hp: 180,
-				attack_power: 2,
-				counter_attack_power: 55
-			}
-		],
-		start_game: function() {
+		canFight: false,
+		baseAttackPower: 0,
+		gameover: false,
+		initialize_game: function(){
 			starWarsRPG.build_game();
-
 		},
 		build_game: function(){
 			$(document).attr('title', 'Star Wars RPG Game');
 
 			$("body").css('background-image', 'url(assets/images/'+ starWarsRPG.bg_image +')');
 			$("body").css('background-size', 'cover');
+
+			// TODO: Dynamically build html
 	
+		},
+		player_attack: function() {
+			var defenderName = $(".defender-area .name").text();
+			var playerDamage = $(".player-area .character").data("attack-power");
+			var defenderHealth = $(".defender-area .hp").data("hp");
+			var newDefenderHealth = parseInt(defenderHealth) - parseInt(playerDamage);
+			$(".defender-area .hp").data("hp", newDefenderHealth);
+			$(".defender-area .hp").text(newDefenderHealth);
+			$(".playerDamageText").text("You attacked " + defenderName + " for " + playerDamage + " damage");
+			playerDamage += starWarsRPG.baseAttackPower;
+			$(".player-area .character").data("attack-power", playerDamage);
+		},
+		counter_attack: function() {
+			var defenderName = $(".defender-area .name").text();
+			var defenderCounterDamage = $(".defender-area .character").data("counter-attack-power");
+			var playerHealth = $(".player-area .hp").data("hp");
+			var newPlayerHealth = parseInt(playerHealth) - parseInt(defenderCounterDamage);
+			$(".player-area .hp").data("hp", newPlayerHealth);
+			$(".player-area .hp").text(newPlayerHealth);
+			$(".defenderDamageText").text(defenderName + " attacked you back for " + defenderCounterDamage + " damage");
+		},
+		check_health: function() {
+			var playerHealth = $(".player-area .hp").data("hp");
+			if (playerHealth <= 0) {
+				starWarsRPG.gameover = true;
+				$(".playerDamageText").text("You have been defeated...GAME OVER!!!");
+				$(".defenderDamageText").text('');
+
+				var btnRestart = $("<button>");
+				btnRestart.text('Restart');
+				btnRestart.attr('id', 'restart');
+				$("#row-5").append(btnRestart);
+			}
+
+			var defenderName = $(".defender-area .name").text();
+			var defenderHealth = $(".defender-area .hp").data("hp");
+			if (defenderHealth <= 0) {
+				starWarsRPG.canFight = false;
+				$(".defender-area .character").remove();
+				$(".playerDamageText").text("You have defeated " + defenderName + ", you can choose to fight another enemy.");
+				$(".defenderDamageText").text('');
+				starWarsRPG.check_win_condition();
+			}
+		},
+		check_win_condition: function() {
+			if($(".enemies-area").children().length === 0) {
+				starWarsRPG.gameover = true;
+				$(".playerDamageText").text("You Won!!!! GAME OVER!!!");
+				$(".defenderDamageText").text('');
+
+				var btnRestart = $("<button>");
+				btnRestart.text('Restart');
+				btnRestart.attr('id', 'restart');
+				$("#row-5").append(btnRestart);
+			}
+		},
+		restart_game: function() {
+			// TODO: Reset player damage power back to initial value
+			starWarsRPG.canFight = false;
+			starWarsRPG.gameover = false;
+			// TODO: Move characters back to initial positions (above Your Character)
+			// TODO: remove the restart button
 		}
 	};
 
 	// crystalsCollector.initialize_game();
-	starWarsRPG.start_game();
+	starWarsRPG.initialize_game();
 	
 	// --------------------------------
 	// CrystalsCollector event handlers
@@ -299,17 +335,36 @@ $(document).ready(function() {
 	// Start Wars Click Event Handlers
 	// --------------------------------
 	$("li.character").on('click', function(event) {
-		console.log($(this).parent()[0].classList[0]);
-		var location = $(this).parent()[0].classList[0];
-		if(location === "character-list" && $(".player-holder").children().length === 0) {
-			$(this).appendTo('.player-holder');
-			$(".character-list").children().addClass('enemy').removeClass('available').appendTo('.enemies-holder');
-		}else if (location === "enemies-holder" && $(".defender-holder").children().length === 0) {
-			$(this).appendTo('.defender-holder').removeClass('enemy').addClass('defender');
-		}else if(location === "defender-holder") {
-
+		if(!starWarsRPG.gameover) {
+			var location = $(this).parent()[0].classList[0];
+			if(location === "character-list" && $(".player-area").children().length === 0) {
+				$(this).appendTo('.player-area');
+				$(".character-list").children().addClass('enemy').removeClass('available').appendTo('.enemies-area');
+				starWarsRPG.baseAttackPower = $(".player-area .character").data("attack-power");
+			}else if (location === "enemies-area" && $(".defender-area").children().length === 0) {
+				$(this).appendTo('.defender-area').removeClass('enemy').addClass('defender');
+				starWarsRPG.canFight = true;
+				$(".playerDamageText").text('');
+			}
 		}
 	});
 
+	$("#btn-attack").on('click', function(event) {
+		if(!starWarsRPG.gameover && starWarsRPG.canFight) {
+			starWarsRPG.player_attack();
+			starWarsRPG.check_health();
 
+			if (starWarsRPG.canFight) {
+				starWarsRPG.counter_attack();
+			}
+		}else if (!starWarsRPG.canFight) {
+			$(".playerDamageText").text('No enemy here');
+		}
+	});
+
+	$("#restart").on('click', function(event) {
+		if(starWarsRPG.gameover) {
+			starWarsRPG.restart_game();	
+		}
+	});
 });
