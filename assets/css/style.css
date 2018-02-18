@@ -1,3 +1,13 @@
+.crystals-collector {
+	background-image: url(../images/circles-dark.png);
+}
+
+.star-wars {
+	background-image: url(../images/xwing-bg.jpg);
+	background-size: cover;
+}
+
+
 /*-------------------------*/
 /*----CrystalsCollector----*/
 /*-------------------------*/
