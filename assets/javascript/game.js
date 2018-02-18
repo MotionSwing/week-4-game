@@ -1,4 +1,5 @@
 $(document).ready(function() {
+
 // -----------------------
 // CrystalsCollector Game
 // -----------------------
@@ -12,36 +13,15 @@ $(document).ready(function() {
 		initialize_game: function(){
 			crystalsCollector.build_game();
 			crystalsCollector.start_game();
+			crystalsCollector.addListeners();
 		},
 		start_game: function(){
 			// crystalsCollector.gameover = false;
-			crystalsCollector.change_values();
 			crystalsCollector.randomNum = Math.floor(Math.random() * (120 - 19)) + 19;
+			crystalsCollector.change_values();
 			crystalsCollector.player_score = 0;
 			$("#target-number").text(crystalsCollector.randomNum);
 			$("#score").text(crystalsCollector.player_score);
-		},
-		check_score: function(){
-
-			if(crystalsCollector.player_score === crystalsCollector.randomNum) {
-				crystalsCollector.game_status = "win";
-				crystalsCollector.wins++;
-				$("#wins").text("Wins: " + crystalsCollector.wins);
-
-				alert("You won!!");
-				// crystalsCollector.gameover = true;
-				crystalsCollector.change_colors();
-				crystalsCollector.start_game();
-			}else if (crystalsCollector.player_score > crystalsCollector.randomNum) {
-				crystalsCollector.game_status = "loss";
-				crystalsCollector.losses++;
-				$("#losses").text("Losses: " + crystalsCollector.losses);
-
-				alert("You Lost!!");
-				// crystalsCollector.gameover = true;
-				crystalsCollector.change_colors();
-				crystalsCollector.start_game();
-			}
 		},
 		build_game: function(){
 			$(document).attr('title', 'CrystalsCollector Game');
@@ -49,14 +29,12 @@ $(document).ready(function() {
 			// Add background
 			$("body").removeClass().addClass('crystals-collector');
 
+			$("#row-1, #row-2, #row-3, #row-4, #row-5").empty().removeClass();
 			// Add Row 1 Content
-			$("#row-1").empty().removeClass();
 			var title = $("<h1>").text("CrystalsCollector!").addClass('col display-4 p-2 text-center');
 			$("#row-1").append(title).addClass('row mb-3');
 
 			// Add Row 2 Content
-			$("#row-2").empty().removeClass();
-
 			var instructions = "You will be give a random number at the start of " + 
 				"the game. There are four crystals below. By clicking on a crystal" + 
 				" you will add a specific amount of points to your total score. " + 
@@ -75,8 +53,6 @@ $(document).ready(function() {
 			$("#row-2").append(colDiv).addClass('row mb-3');
 
 			// Add Row 3 Content
-			$("#row-3").empty().removeClass();
-
 			// Column for Random Number
 			var left_card_body = $("<div>").attr('id', 'target-number').addClass('card-body text-center');
 			var left_card_header = $("<div>").text("Random Number").addClass('card-header text-center');
@@ -103,40 +79,69 @@ $(document).ready(function() {
 			$("#row-3").append(left_div).append(right_div).addClass('row mb-3 flex-column flex-lg-row');
 
 			// Add Row 4 Content
-			$("#row-4").empty().removeClass();
 			var winSpan = $("<span>").text("Wins: 0").addClass('mr-3').attr('id', 'wins');
 			var lossesSpan = $("<span>").text("Losses: 0").attr('id', 'losses');
 			var row4CardBodyDiv = $("<div>").append(winSpan).append(lossesSpan).addClass('card-body text-center').attr('id', 'record');
 			var row4CardHeaderDiv = $("<div>").text('Win/Loss Record').addClass('card-header text-center');
 			var row4CardDiv = $("<div>").append(row4CardHeaderDiv).append(row4CardBodyDiv).addClass('card col-12 p-0 mr-3');
 			$("#row-4").append(row4CardDiv).addClass('row mb-3');
+		},
+		check_score: function(){
+			if(crystalsCollector.player_score === crystalsCollector.randomNum) {
+				crystalsCollector.game_status = "win";
+				crystalsCollector.wins++;
+				$("#wins").text("Wins: " + crystalsCollector.wins);
 
-			// // Add Row 5 Content
-			$("#row-5").empty().removeClass();
+				alert("You won!!");
+				// crystalsCollector.gameover = true;
+				crystalsCollector.change_colors();
+				crystalsCollector.start_game();
+			}else if (crystalsCollector.player_score > crystalsCollector.randomNum) {
+				crystalsCollector.game_status = "loss";
+				crystalsCollector.losses++;
+				$("#losses").text("Losses: " + crystalsCollector.losses);
+
+				alert("You Lost!!");
+				// crystalsCollector.gameover = true;
+				crystalsCollector.change_colors();
+				crystalsCollector.start_game();
+			}
 		},
 		change_values: function(){	
-			$("#option-1").attr('data-value', Math.floor(Math.random() * (12 - 1)) + 1);
-			$("#option-2").attr('data-value', Math.floor(Math.random() * (12 - 1)) + 1);
-			$("#option-3").attr('data-value', Math.floor(Math.random() * (12 - 1)) + 1);
-			$("#option-4").attr('data-value', Math.floor(Math.random() * (12 - 1)) + 1);
+			for (var i = 1; i <= 4; i++) {
+				$("#option-" + i).attr('data-value', Math.floor(Math.random() * (12 - 1)) + 1);
+			}
 		},
 		change_colors: function(){
-			$("#option-1").css('filter', 'hue-rotate('+ Math.floor(Math.random()*360) +'deg)');
-			$("#option-2").css('filter', 'hue-rotate('+ Math.floor(Math.random()*360) +'deg)');
-			$("#option-3").css('filter', 'hue-rotate('+ Math.floor(Math.random()*360) +'deg)');
-			$("#option-4").css('filter', 'hue-rotate('+ Math.floor(Math.random()*360) +'deg)');
+			for (var i = 1; i <= 4; i++) {
+				$("#option-" + i).css('filter', 'hue-rotate('+ Math.floor(Math.random()*360) +'deg)');
+			}
+		},
+		addListeners: function() {
+			$(".crystals-collector").off().on('click', '.gems li', function(event) {
+				// if (!crystalsCollector.gameover){
+					crystalsCollector.player_score += parseInt($(this).attr('data-value'));
+					$("#score").text(crystalsCollector.player_score);
+					crystalsCollector.check_score();
+				// }else if (crystalsCollector.gameover){
+				// 	crystalsCollector.change_colors();
+				// 	crystalsCollector.start_game();
+				// }
+			}).on('click', '.hide-show', function(event) {
+				event.preventDefault();
+				($(".hide-show").text() === "Hide") ? $(".hide-show").text("Show") : $(".hide-show").text("Hide");
+				$("#row-2 .card-body").slideToggle();
+			});	
 		}
 	};
 
 // --------------
 // Star Wars Game
 // --------------
-
 	var starWarsRPG = {
-		title: "Star Wars RPG!",
+		gameover: false,
 		canFight: false,
 		baseAttackPower: 0,
-		gameover: false,
 		characters: [
 			{
 				id: "obi",
@@ -157,7 +162,7 @@ $(document).ready(function() {
 			{
 				id: "sidious",
 				name: "Darth Sidious",
-				image: "assets/images/sidious-2.jpg",
+				image: "assets/images/sidious.jpg",
 				base_hp: 150,
 				base_attack: 10,
 				counter_attack: 20
@@ -175,22 +180,23 @@ $(document).ready(function() {
 			starWarsRPG.build_game();
 			starWarsRPG.addListeners();
 		},
+		restart_game: function() {
+			starWarsRPG.build_game();
+		},
 		build_game: function(){
 			starWarsRPG.canFight = false;
 			starWarsRPG.baseAttackPower = 0;
 			starWarsRPG.gameover = false;
-			$(document).attr('title', starWarsRPG.title);
+			$(document).attr('title', 'Star Wars RPG Game');
 			$("body").removeClass().addClass('star-wars');
 
 			$("#row-1, #row-2, #row-3, #row-4, #row-5").empty().removeClass();
-
 			// Row 1
 			var title = $("<h1>").text("Star Wars RPG!");
 			var char_list = $("<ul>").addClass('character-list');
 
 			for (var i = 0; i < starWarsRPG.characters.length; i++) {
-				var char = $("<li>").addClass('character char-' + (i + 1) + ' available');
-				char.attr("id", starWarsRPG.characters[i].id);
+				var char = $("<li>").addClass('character char-' + (i + 1) + ' available').attr("id", starWarsRPG.characters[i].id);
 				char.data({
 					hp: starWarsRPG.characters[i].base_hp,
 					"attack-power": starWarsRPG.characters[i].base_attack,
@@ -200,7 +206,6 @@ $(document).ready(function() {
 				var char_name = $("<div>").addClass('name').text(starWarsRPG.characters[i].name);
 				var char_img = $("<img>").attr('src', starWarsRPG.characters[i].image);
 				var char_hp = $("<div>").addClass('hp').text(starWarsRPG.characters[i].base_hp);
-				// char_hp.attr('data-hp', starWarsRPG.characters[i].base_hp);
 				char.append(char_name, char_img, char_hp);
 				char_list.append(char);
 			}
@@ -276,11 +281,8 @@ $(document).ready(function() {
 				}
 			}
 		},
-		restart_game: function() {
-			starWarsRPG.build_game();
-		},
 		addListeners: function() {
-			$(".container").on('click', '.character', function() {
+			$(".star-wars").off().on('click', '.character', function() {
 				if(!starWarsRPG.gameover) {
 					var location = $(this).parent()[0].classList[0];
 					if(location === "character-list" && $(".player-area").children().length === 0) {
@@ -313,25 +315,28 @@ $(document).ready(function() {
 		}
 	};
 
-	// crystalsCollector.initialize_game();
 	starWarsRPG.initialize_game();
 	
-	// --------------------------------
-	// CrystalsCollector event handlers
-	// --------------------------------
-	$(".gems li").click(function(event) {
-		// if (!crystalsCollector.gameover){
-			crystalsCollector.player_score += parseInt($(this).attr('data-value'));
-			$("#score").text(crystalsCollector.player_score);
-			crystalsCollector.check_score();
-		// }else if (crystalsCollector.gameover){
-		// 	crystalsCollector.change_colors();
-		// 	crystalsCollector.start_game();
-		// }
+	var expanded = false;
+	$(".menu").on('click', '.btn-menu', function() {
+		if (!expanded) {
+			$(".menu").animate({width: '200px', height: '120px'}, 350).addClass('active');
+			$(".menu-right").fadeIn('slow').css('display', 'flex');
+			expanded = true;
+		}else {
+			closeMenu();
+		}
+	}).on('click', '.game-cc', function(event) {
+		crystalsCollector.initialize_game();
+		closeMenu();
+	}).on('click', '.game-sw', function(event) {
+		starWarsRPG.initialize_game();
+		closeMenu();
 	});
 
-	$(".hide-show").click(function(event) {
-		($(".hide-show").text() === "Hide") ? $(".hide-show").text("Show") : $(".hide-show").text("Hide");
-		$("#row-2 .card-body").toggle();
-	});
+	function closeMenu() {
+		$(".menu-right").hide();
+		$(".menu").animate({width: 0, height: 0}, 350).removeClass('active');
+		expanded = false;
+	}
 });

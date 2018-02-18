@@ -1,18 +1,12 @@
-.crystals-collector {
-	background-image: url(../images/circles-dark.png);
-}
-
-.star-wars {
-	background-image: url(../images/xwing-bg.jpg);
-	background-size: cover;
-}
-
-
 /*-------------------------*/
 /*----CrystalsCollector----*/
 /*-------------------------*/
 
-h1 {
+.crystals-collector {
+	background-image: url(../images/circles-dark.png);
+}
+
+.crystals-collector h1 {
 	background-color: #fff;
 	background-color: #d60ad6;
 	color: #fff;
@@ -108,4 +102,187 @@ h1 {
 	top: 2px;
 	transform: rotate(-30deg);
 
+}
+
+/*-------------------*/
+/*----Star Wars -----*/
+/*-------------------*/
+
+.star-wars {
+	background-image: url(../images/xwing-bg.jpg);
+	background-size: cover;
+	font-family: Consolas,serif;
+	padding: 10px;
+	color: #000;
+}
+
+.star-wars .container {
+	max-width: 100%;
+	padding: 0;
+	margin: 0;
+}
+
+.star-wars h1,
+.star-wars h3,
+.star-wars ul,
+.star-wars p  {
+	margin-bottom: 0;
+}
+
+.star-wars h1 {
+	font-size: 40px;
+	text-align: right;
+	margin-right: 100px;
+}
+
+.star-wars h3 {
+	font-size: 28px;
+	line-height: 28px;
+}
+
+.star-wars p {
+	line-height: 16px;
+}
+
+.character-list {
+	display: flex;
+}
+
+.character {
+	display: flex;
+	flex-flow: column nowrap;
+	justify-content: center;
+	align-items: center;
+	font-size: 12px;
+	border: 2px solid #000;
+	background-color: #fff;
+	padding: 0 5px;
+	cursor: pointer;
+	max-width: 174px;
+}
+
+.available {
+	background-color: #fff;
+	border: 2px solid #00e700;
+}
+
+.character img {
+	width: 150px;
+	height: 75px;
+	margin: 0 5px;	
+}
+
+.enemy {
+	background-color: #f00;
+	border: 2px solid #000;
+}
+
+.defender {
+	background-color: #000;
+	border: 2px solid green;
+	color: #fff;
+}
+
+.player-area,
+.enemies-area,
+.defender-area {
+	display: flex;
+}
+
+.player-area {
+	height: 113px;
+}
+
+.defender-area {
+	flex-flow: column nowrap;
+	height: 113px;
+}
+
+/*-----------------*/
+/*----Game Menu----*/
+/*-----------------*/
+
+.menu {
+	display: flex;
+	position: absolute;
+	top: 5px;
+	margin-top: 8px;
+	margin-left: 5px;
+	background-color: #f8f8f8;
+	border-radius: 4px;
+	cursor: pointer;
+	left: 10px;
+}
+
+.btn-menu:hover {
+	background-color: #ddd;
+}
+
+.menu:focus,
+.btn-menu:focus {
+	outline: 0;
+}
+
+.menu .icon-bar {
+	background-color: #888;
+	display: block;
+	width: 22px;
+	height: 2px;
+	border-radius: 1px;
+}
+
+.menu .icon-bar+.icon-bar {
+	margin-top: 4px;
+}
+
+.btn-menu {
+	position: relative;
+	top: 0px;
+	left: 0px;
+	padding: 9px 10px;
+	border-radius: 4px;
+	background-color: #f8f8f8;
+	border: 1px solid #ddd;
+	cursor: pointer;
+}
+
+.menu.active {	
+	background-color: #f8f8f8;
+	border: 1px solid #ddd;
+	cursor: initial;
+}
+
+.menu.active .btn-menu {
+	border: 0;
+	background-color: #f8f8f8;
+}
+
+.menu-right {
+	display: none;
+	flex-flow: column nowrap;
+	font-family: "Segoe UI", Arial, sans-serif;
+}
+
+.menu-right h2 {
+	margin-top: 10px;
+	font-size: 12px;
+	text-align: center;
+}
+
+.menu-right button {
+	margin-bottom: 10px;
+	cursor: pointer;
+	background-color: #444;
+	color: #eee;
+	border: 1px solid transparent;
+	border-radius: 4px;
+	outline: 0;
+}
+
+.game-cc:hover {
+	box-shadow: 0 0 20px #d60ad6;
+}
+
+.game-sw:hover {
+	box-shadow: 0 0 20px rgba(0,0,255,0.8);
 }
