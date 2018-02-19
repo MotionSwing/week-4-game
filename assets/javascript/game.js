@@ -443,11 +443,10 @@ $(document).ready(function() {
 		}else if($(this).hasClass('easy')){
 			starWarsRPG.reset_attack_values();
 		}
-		closeMenu();
+		// closeMenu();
 	}).on('click', '.styles button', function(event) {
 		$(".styles button").removeClass('active');
 		$(this).addClass('active');
-		closeMenu();
 
 		if ($(this).hasClass('style-2')) {
 			$("body").removeClass('style-3').addClass('style-2');
@@ -465,7 +464,7 @@ $(document).ready(function() {
 			$("body").removeClass('style-2 style-3');
 			$("#row-4 h3").show();
 		}
-		closeMenu();
+		// closeMenu();
 	});
 
 	function closeMenu() {

@@ -26,6 +26,12 @@ To start the game click the link below and use the menu in the upper left corner
 
 ---
 
+## Navigation & Options
+
+You can switch between games by using the menu in the upper left corner. Through the menu you can also change the difficulty rating and style of the game.
+
+---
+
 ## Author
 
 This project was written by 
