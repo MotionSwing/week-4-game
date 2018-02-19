@@ -9,6 +9,8 @@ $(document).ready(function() {
 		wins: 0,
 		losses: 0,
 		bg_image: "circles-dark.png",
+		hard_crystal_pos: 1,
+		click_count: 0,
 		initialize_game: function(){
 			crystalsCollector.build_game();
 			crystalsCollector.start_game();
@@ -18,6 +20,8 @@ $(document).ready(function() {
 			crystalsCollector.randomNum = Math.floor(Math.random() * (120 - 19)) + 19;
 			crystalsCollector.change_values();
 			crystalsCollector.player_score = 0;
+			crystalsCollector.hard_crystal_pos = Math.floor(Math.random() * 4) + 1;
+			click_count = 0;
 			$("#target-number").text(crystalsCollector.randomNum);
 			$("#score").text(crystalsCollector.player_score);
 		},
@@ -89,23 +93,29 @@ $(document).ready(function() {
 				crystalsCollector.wins++;
 				$("#wins").text("Wins: " + crystalsCollector.wins);
 
-				// TODO: add function that takes in parameter "You won!!!" and displays a modal form using bootstrap
-				alert("You won!!");
+				// alert("You won!!");
+				crystalsCollector.display_outcome("You won!!");
 				crystalsCollector.change_colors();
 				crystalsCollector.start_game();
 			}else if (crystalsCollector.player_score > crystalsCollector.randomNum) {
 				crystalsCollector.losses++;
 				$("#losses").text("Losses: " + crystalsCollector.losses);
 
-				alert("You Lost!!");
+				// alert("You Lost!!");
+				crystalsCollector.display_outcome("You Lost!!");
 				crystalsCollector.change_colors();
 				crystalsCollector.start_game();
 			}
 		},
-		change_values: function(){	
-			for (let i = 1; i <= 4; i++) {
-				$("#option-" + i).attr('data-value', Math.floor(Math.random() * (12 - 1)) + 1);
-			}
+		change_values: function(pos){
+			if (pos != null) {
+				$("#option-" + pos).attr('data-value', Math.floor(Math.random() * (12 - 1)) + 1);
+			}else {
+				for (let i = 1; i <= 4; i++) {
+					$("#option-" + i).attr('data-value', Math.floor(Math.random() * (12 - 1)) + 1);
+				}	
+			}	
+			
 		},
 		change_colors: function(){
 			for (let i = 1; i <= 4; i++) {
@@ -114,14 +124,35 @@ $(document).ready(function() {
 		},
 		addListeners: function() {
 			$(".crystals-collector").off().on('click', '.gems li', function(event) {
+				click_count++;
 				crystalsCollector.player_score += parseInt($(this).attr('data-value'));
 				$("#score").text(crystalsCollector.player_score);
 				crystalsCollector.check_score();
+
+				// Hard Mode - Randomly change the value of two crystals when any crystal 
+				// is clicked. The position of one of those two crystal changes after each 
+				// round, while the position of the other changes after each click.
+				if($(".difficulty .hard").hasClass('active')) {
+					crystalsCollector.change_values(crystalsCollector.hard_crystal_pos);
+					crystalsCollector.change_values(Math.floor(Math.random() * 4) + 1);
+				}
 			}).on('click', '.hide-show', function(event) {
 				event.preventDefault();
 				($(".hide-show").text() === "Hide") ? $(".hide-show").text("Show") : $(".hide-show").text("Hide");
 				$("#row-2 .card-body").slideToggle();
 			});	
+		},
+		display_outcome: function(message) {
+			var outcome_status = $("<p>").text(message).addClass('status');
+			var outcome_clicks = $("<p>").text("You had a total of "+ click_count +" clicks").addClass('clicks');
+			var outcome_btn = $("<button>").text("Close");
+
+			var outcome_div = $("<div>").addClass('outcome').append(outcome_status, outcome_clicks, outcome_btn);
+			$("body").append(outcome_div);
+
+			$(".outcome").on('click', 'button', function(event) {
+				$(".outcome").remove();
+			});
 		}
 	};
 
@@ -183,10 +214,10 @@ $(document).ready(function() {
 			starWarsRPG.defenderBaseHP = null,
 			$(document).attr('title', 'Star Wars RPG Game');
 
-			if($("body").hasClass('style-2')) {
-				$("body").removeClass().addClass('star-wars style-2');
+			if($("body").hasClass('crystals-collector')) {
+				$("body").removeClass('crystals-collector').addClass('star-wars');
 			}else {
-				$("body").removeClass().addClass('star-wars');
+				$("body").addClass('star-wars');
 			}
 			
 
@@ -207,6 +238,15 @@ $(document).ready(function() {
 				const char_img = $("<img>").attr('src', starWarsRPG.characters[i].image);
 				const char_hp = $("<div>").addClass('hp').text(starWarsRPG.characters[i].base_hp);
 
+				const char_hp_loss = $("<div>").addClass('progress-bar-preview');
+				char_hp_loss.attr({
+					role:'progressbar',
+					style: 'width: 0%;',
+					"aria-valuenow": 0,
+					"aria-valuemin": 0,
+					"aria-valuemax": starWarsRPG.characters[i].base_hp,
+				});
+
 				const char_hp_remaining = $("<div>").addClass('progress-bar').text(starWarsRPG.characters[i].base_hp);
 				char_hp_remaining.attr({
 					role:'progressbar',
@@ -215,7 +255,8 @@ $(document).ready(function() {
 					"aria-valuemin": 0,
 					"aria-valuemax": starWarsRPG.characters[i].base_hp,
 				});
-				const char_hp_total = $("<div>").addClass('progress').append(char_hp_remaining);
+
+				const char_hp_total = $("<div>").addClass('progress').append(char_hp_remaining, char_hp_loss);
 				char_list.append(char.append(char_name, char_img, char_hp,char_hp_total));
 			}
 			$("#row-1").append(title, char_list);
@@ -235,7 +276,7 @@ $(document).ready(function() {
 			fight_btn = $("<button>").attr('id', 'btn-attack').text('Attack');
 			$("#row-4").append(title, fight_btn);
 
-			$(".star-wars.style-2 #row-4 h3").hide();
+			$(".star-wars.style-2 #row-4 h3, .star-wars.style-3 #row-4 h3").hide();
 
 			// Row 5
 			title = $("<h3>").text("Defender");
@@ -252,9 +293,10 @@ $(document).ready(function() {
 			$(".defender-area .character").data("hp", defenderHealth);
 			$(".defender-area .hp").text(defenderHealth);
 			
-			// Update Progress Bar
-			$(".defender-area .progress-bar").css('width', (defenderHealth / starWarsRPG.defenderBaseHP) * 100 + '%');
-			$(".defender-area .progress-bar").text(defenderHealth);
+			// Update Progress Bars
+			$(".style-2 .defender-area .progress-bar").css('width', (defenderHealth / starWarsRPG.defenderBaseHP) * 100 + '%').text(defenderHealth);
+			$(".style-3 .defender-area .progress-bar").animate({width: (defenderHealth / starWarsRPG.defenderBaseHP) * 100 + '%'}, 500).text(defenderHealth);
+			$(".style-3 .defender-area .progress-bar-preview").fadeIn('400').text(playerDamage).animate({width: (playerDamage / starWarsRPG.defenderBaseHP) * 100 + '%'}, 500).fadeOut('700');
 
 			$(".playerDamageText").text("You attacked " + defender + " for " + playerDamage + " damage");
 			
@@ -269,9 +311,10 @@ $(document).ready(function() {
 			$(".player-area .character").data("hp", playerHealth);
 			$(".player-area .hp").text(playerHealth);
 
-			// Update Progress Bar
-			$(".player-area .progress-bar").css('width', (playerHealth / starWarsRPG.playerBaseHP) * 100 + '%');
-			$(".player-area .progress-bar").text(playerHealth);
+			// Update Progress Bars
+			$(".style-2 .player-area .progress-bar").css('width', (playerHealth / starWarsRPG.playerBaseHP) * 100 + '%').text(playerHealth);
+			$(".style-3 .player-area .progress-bar").animate({width: (playerHealth / starWarsRPG.playerBaseHP) * 100 + '%'}, 500).text(playerHealth);
+			$(".style-3 .player-area .progress-bar-preview").fadeIn('400').text(defenderCounterDamage).animate({width: (defenderCounterDamage / starWarsRPG.playerBaseHP) * 100 + '%'}, 500).fadeOut('700');
 
 			$(".defenderDamageText").text(defender + " attacked you back for " + defenderCounterDamage + " damage");
 		},
@@ -282,7 +325,7 @@ $(document).ready(function() {
 				$(".playerDamageText").text("You have been defeated...GAME OVER!!!");
 				$(".defenderDamageText").text('');
 				$("#restart").css('display', 'block');
-				$(".star-wars.style-2 #row-4").hide();
+				$(".star-wars.style-2 #row-4, .star-wars.style-3 #row-4").hide();
 			}
 
 			const defenderHealth = $(".defender-area .character").data("hp");
@@ -297,7 +340,7 @@ $(document).ready(function() {
 					$(".playerDamageText").text("You Won!!!! GAME OVER!!!");
 					$(".defenderDamageText").text('');
 					$("#restart").css('display', 'block');
-					$(".star-wars.style-2 #row-4").hide();
+					$(".star-wars.style-2 #row-4, .star-wars.style-3 #row-4").hide();
 				}
 			}
 		},
@@ -308,13 +351,13 @@ $(document).ready(function() {
 					if(current_area === "character-list" && $(".player-area").children().length === 0) {
 						$(this).appendTo('.player-area');
 						$(".character-list").children().addClass('enemy').removeClass('available').appendTo('.enemies-area'); 
-						$(".star-wars.style-2 .character-list").hide();
+						$(".star-wars.style-2 .character-list, .star-wars.style-3 .character-list").hide();
 						starWarsRPG.baseAttackPower = $(".player-area .character").data("attack-power");
 						starWarsRPG.playerBaseHP = $(".player-area .character").data("hp");
 					}else if (current_area === "enemies-area" && $(".defender-area").children().length === 0) {
 						$(this).appendTo('.defender-area').removeClass('enemy').addClass('defender').removeData('attack-power');
 						starWarsRPG.defenderBaseHP = $(".defender-area .character").data("hp");
-						$(".star-wars.style-2 #row-4").show();
+						$(".star-wars.style-2 #row-4, .star-wars.style-3 #row-4").show();
 						starWarsRPG.canFight = true;
 						$(".playerDamageText").text('');
 					}
@@ -345,7 +388,7 @@ $(document).ready(function() {
 	var expanded = false;
 	$(".menu").on('click', '.btn-menu', function() {
 		if (!expanded) {
-			$(".menu").animate({width: '210px', height: '260px'}, 350).addClass('active');
+			$(".menu").animate({width: '210px', height: '290px'}, 350).addClass('active');
 			$(".menu-right").fadeIn('slow').css('display', 'flex');
 			expanded = true;
 		}else {
@@ -369,13 +412,19 @@ $(document).ready(function() {
 		closeMenu();
 
 		if ($(this).hasClass('style-2')) {
-			$("body").addClass('style-2');
+			$("body").removeClass('style-3').addClass('style-2');
 			$(".star-wars.style-2 #row-4 h3").hide();
 			if($(".player-area").children().length > 0) {
 				$(".star-wars.style-2 .character-list").hide();
 			}
+		}else if($(this).hasClass('style-3')){
+			$("body").removeClass('style-2').addClass('style-3');
+			$(".star-wars.style-3 #row-4 h3").hide();
+			if($(".player-area").children().length > 0) {
+				$(".star-wars.style-3 .character-list").hide();
+			}
 		}else {
-			$("body").removeClass('style-2');
+			$("body").removeClass('style-2 style-3');
 			$("#row-4 h3").show();
 		}
 
