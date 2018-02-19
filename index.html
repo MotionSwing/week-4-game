@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title></title>
+	<title>Star Wars RPG Game</title>
 	<!-- Reset -->
 	<link rel="stylesheet" href="assets/css/reset.css">
 
@@ -15,11 +15,15 @@
 </head>
 <body>
 	<div class="container">
+		<!-- Start Game Content -->
 		<div id="row-1"></div>
 		<div id="row-2"></div>
 		<div id="row-3"></div>
 		<div id="row-4"></div>
 		<div id="row-5"></div>
+		<!-- End Game Content -->
+
+		<!-- Start Game Menu -->
 		<div class="menu">
 			<div class="menu-left">
 				<button type="button" class="btn-menu">
@@ -29,13 +33,19 @@
 				</button>
 			</div>
 			<div class="menu-right">
-				<div>
-					<h2>Game Selection</h2>
+				<h2>Game Selection</h2>
+				<div class="games">
+					<button class="game-cc">Crystals Collector</button>
+					<button class="game-sw active">Star Wars</button>
 				</div>
-				<button class="game-cc">Crystals Collector</button>
-				<button class="game-sw">Star Wars</button>
+				<h2>Difficulty</h2>
+				<div class="difficulty">
+					<button class="easy active">Easy</button>
+					<button class="hard">Hard</button>
+				</div>
 			</div>
 		</div>
+		<!-- End Game Menu -->
 	</div>
 </body>
 </html>

@@ -3,7 +3,7 @@ $(document).ready(function() {
 // -----------------------
 // CrystalsCollector Game
 // -----------------------
-	var crystalsCollector = {
+	const crystalsCollector = {
 		randomNum: 0,
 		player_score: 0,
 		wins: 0,
@@ -22,18 +22,18 @@ $(document).ready(function() {
 			$("#score").text(crystalsCollector.player_score);
 		},
 		build_game: function(){
-			$(document).attr('title', 'CrystalsCollector Game');
+			$(document).attr('title', 'Crystals Collector Game');
 
 			// Add background
 			$("body").removeClass().addClass('crystals-collector');
 
 			$("#row-1, #row-2, #row-3, #row-4, #row-5").empty().removeClass();
 			// Add Row 1 Content
-			var title = $("<h1>").text("CrystalsCollector!").addClass('col display-4 p-2 text-center');
-			$("#row-1").append(title).addClass('row mb-3');
+			const title = $("<h1>").addClass('col display-4 p-2 text-center').text("Crystals Collector!");
+			$("#row-1").addClass('row mb-3').append(title);
 
 			// Add Row 2 Content
-			var instructions = "You will be given a random number at the start of " + 
+			const instructions = "You will be given a random number at the start of " + 
 				"the game. There are four crystals below. By clicking on a crystal" + 
 				" you will add a specific amount of points to your total score. " + 
 				"You win the game by matching your total score to the random number," + 
@@ -41,60 +41,59 @@ $(document).ready(function() {
 				"number. The value of each crystal is hidden from you until you " + 
 				"click on it. Each time the game starts, the value of each crystal will change."
 
-			var btnHide = $("<span>").text("Hide").addClass('hide-show float-right');
-			var cardHeaderDiv = $("<div>").text("Instructions").append(btnHide).addClass('card-header text-center');
-			var instHolder = $("<p>").text(instructions);
-			var cardBodyDiv = $("<div>").append(instHolder).addClass('card-body');
-			var cardDiv = $("<div>").append(cardHeaderDiv).append(cardBodyDiv).addClass('card');
-			var colDiv = $("<div>").append(cardDiv).addClass('col-12');
-			$("#row-2").append(colDiv).addClass('row mb-3');
+			const btnHide = $("<span>").addClass('hide-show float-right').text("Hide");
+			const cardHeaderDiv = $("<div>").addClass('card-header text-center').text("Instructions").append(btnHide);
+			const instHolder = $("<p>").text(instructions);
+			const cardBodyDiv = $("<div>").addClass('card-body').append(instHolder);
+			const cardDiv = $("<div>").addClass('card').append(cardHeaderDiv, cardBodyDiv);
+			const colDiv = $("<div>").addClass('col-12 p-0').append(cardDiv);
+			$("#row-2").addClass('row mb-3').append(colDiv);
 
 			// Add Row 3 Content
 			// Column for Random Number
-			var left_card_body = $("<div>").attr('id', 'target-number').addClass('card-body text-center');
-			var left_card_header = $("<div>").text("Random Number").addClass('card-header text-center');
-			var left_card = $("<div>").append(left_card_header).append(left_card_body).addClass("card h-100 p-0 mr-lg-3");
-			var left_col_6 = $("<div>").append(left_card).addClass('col-6 mb-3 mb-lg-0');
+			const left_card_body = $("<div>").attr('id', 'target-number').addClass('card-body text-center');
+			const left_card_header = $("<div>").addClass('card-header text-center').text("Target Number");
+			const left_card = $("<div>").addClass("card h-100 p-0 mr-lg-3").append(left_card_header,left_card_body);
+			const left_col_6 = $("<div>").addClass('col-6 mb-3 mb-lg-0 p-0').append(left_card);
 
 			// Column for Your Score
-			var mid_card_body = $("<div>").attr('id', 'score').addClass('card-body text-center');
-			var mid_card_header = $("<div>").text("Your Score").addClass('card-header text-center');
-			var mid_card = $("<div>").append(mid_card_header).append(mid_card_body).addClass("card h-100 p-0 mr-lg-3");
-			var mid_col_6 = $("<div>").append(mid_card).addClass('col-6 mb-3 mb-lg-0');
-			var left_div = $("<div>").append(left_col_6).append(mid_col_6).addClass('col-12 col-lg-6 row');
+			const mid_card_body = $("<div>").attr('id', 'score').addClass('card-body text-center');
+			const mid_card_header = $("<div>").addClass('card-header text-center').text("Your Score");
+			const mid_card = $("<div>").addClass("card h-100 p-0 mr-lg-3").append(mid_card_header, mid_card_body);
+			const mid_col_6 = $("<div>").addClass('col-6 mb-3 mb-lg-0 p-0 pl-3 pl-lg-0').append(mid_card);
+			const left_div = $("<div>").addClass('col-12 col-lg-6 m-0 p-0 row').append(left_col_6, mid_col_6);
 
 			// Colum for Crystals
-			var gems_holder = $("<ul>").addClass('gems mb-0');
-			for (var i = 1; i <= 4; i++) {
-				var crystal = $("<li>").attr('id', 'option-' + i).addClass('crystal ml-3 mr-3');
+			const gems_holder = $("<ul>").addClass('gems mb-0');
+			for (let i = 1; i <= 4; i++) {
+				const crystal = $("<li>").attr('id', 'option-' + i).addClass('crystal ml-3 mr-3');
 				crystal.attr('data-value', Math.floor(Math.random() * (12 - 1)) + 1);
 				gems_holder.append(crystal);
 			}
-			var right_card_body = $("<div>").append(gems_holder).addClass('card-body text-center').attr('id', 'gem-card');
-			var right_card_header = $("<div>").text("Crystals").addClass('card-header text-center');
-			var right_card = $("<div>").addClass('card h-100 p-0').append(right_card_header, right_card_body);
-			var right_div = $("<div>").append(right_card).addClass('col-12 col-lg-6');
-			$("#row-3").append(left_div).append(right_div).addClass('row mb-3 flex-column flex-lg-row');
+			const right_card_body = $("<div>").attr('id', 'gem-card').addClass('card-body text-center').append(gems_holder);
+			const right_card_header = $("<div>").addClass('card-header text-center').text("Crystals");
+			const right_card = $("<div>").addClass('card h-100 p-0').append(right_card_header, right_card_body);
+			const right_div = $("<div>").addClass('col-12 col-lg-6 p-0').append(right_card);
+			$("#row-3").addClass('row mb-3 flex-column flex-lg-row').append(left_div, right_div);
 
 			// Add Row 4 Content
-			var winSpan = $("<span>").text("Wins: 0").addClass('mr-3').attr('id', 'wins');
-			var lossesSpan = $("<span>").text("Losses: 0").attr('id', 'losses');
-			var row4CardBodyDiv = $("<div>").append(winSpan).append(lossesSpan).addClass('card-body text-center').attr('id', 'record');
-			var row4CardHeaderDiv = $("<div>").text('Win/Loss Record').addClass('card-header text-center');
-			var row4CardDiv = $("<div>").append(row4CardHeaderDiv).append(row4CardBodyDiv).addClass('card col-12 p-0 mr-3');
-			$("#row-4").append(row4CardDiv).addClass('row mb-3');
+			const winSpan = $("<span>").attr('id', 'wins').addClass('mr-3').text("Wins: 0");
+			const lossesSpan = $("<span>").attr('id', 'losses').text("Losses: 0");
+			const row4CardBodyDiv = $("<div>").attr('id', 'record').addClass('card-body text-center').append(winSpan, lossesSpan);
+			const row4CardHeaderDiv = $("<div>").addClass('card-header text-center').text('Win/Loss Record');
+			const row4CardDiv = $("<div>").addClass('card col-12 p-0 mr-3').append(row4CardHeaderDiv, row4CardBodyDiv);
+			$("#row-4").addClass('row mb-3').append(row4CardDiv);
 		},
 		check_score: function(){
 			if(crystalsCollector.player_score === crystalsCollector.randomNum) {
-				crystalsCollector.game_status = "win";
 				crystalsCollector.wins++;
 				$("#wins").text("Wins: " + crystalsCollector.wins);
 
+				// TODO: add function that takes in parameter "You won!!!" and displays a modal form using bootstrap
 				alert("You won!!");
 				crystalsCollector.change_colors();
 				crystalsCollector.start_game();
 			}else if (crystalsCollector.player_score > crystalsCollector.randomNum) {
-				crystalsCollector.game_status = "loss";
 				crystalsCollector.losses++;
 				$("#losses").text("Losses: " + crystalsCollector.losses);
 
@@ -104,12 +103,12 @@ $(document).ready(function() {
 			}
 		},
 		change_values: function(){	
-			for (var i = 1; i <= 4; i++) {
+			for (let i = 1; i <= 4; i++) {
 				$("#option-" + i).attr('data-value', Math.floor(Math.random() * (12 - 1)) + 1);
 			}
 		},
 		change_colors: function(){
-			for (var i = 1; i <= 4; i++) {
+			for (let i = 1; i <= 4; i++) {
 				$("#option-" + i).css('filter', 'hue-rotate('+ Math.floor(Math.random()*360) +'deg)');
 			}
 		},
@@ -129,7 +128,7 @@ $(document).ready(function() {
 // --------------
 // Star Wars Game
 // --------------
-	var starWarsRPG = {
+	const starWarsRPG = {
 		gameover: false,
 		canFight: false,
 		baseAttackPower: 0,
@@ -183,22 +182,21 @@ $(document).ready(function() {
 
 			$("#row-1, #row-2, #row-3, #row-4, #row-5").empty().removeClass();
 			// Row 1
-			var title = $("<h1>").text("Star Wars RPG!");
-			var char_list = $("<ul>").addClass('character-list');
+			let title = $("<h1>").text("Star Wars RPG!");
+			let char_list = $("<ul>").addClass('character-list');
 
-			for (var i = 0; i < starWarsRPG.characters.length; i++) {
-				var char = $("<li>").addClass('character char-' + (i + 1) + ' available').attr("id", starWarsRPG.characters[i].id);
+			for (let i = 0; i < starWarsRPG.characters.length; i++) {
+				const char = $("<li>").attr("id", starWarsRPG.characters[i].id).addClass('character char-' + (i + 1) + ' available');
 				char.data({
 					hp: starWarsRPG.characters[i].base_hp,
 					"attack-power": starWarsRPG.characters[i].base_attack,
 					"counter-attack-power": starWarsRPG.characters[i].counter_attack
 				});
 
-				var char_name = $("<div>").addClass('name').text(starWarsRPG.characters[i].name);
-				var char_img = $("<img>").attr('src', starWarsRPG.characters[i].image);
-				var char_hp = $("<div>").addClass('hp').text(starWarsRPG.characters[i].base_hp);
-				char.append(char_name, char_img, char_hp);
-				char_list.append(char);
+				const char_name = $("<div>").addClass('name').text(starWarsRPG.characters[i].name);
+				const char_img = $("<img>").attr('src', starWarsRPG.characters[i].image);
+				const char_hp = $("<div>").addClass('hp').text(starWarsRPG.characters[i].base_hp);
+				char_list.append(char.append(char_name, char_img, char_hp));
 			}
 			$("#row-1").append(title, char_list);
 
@@ -220,35 +218,33 @@ $(document).ready(function() {
 			// Row 5
 			title = $("<h3>").text("Defender");
 			char_list = $("<ul>").addClass('defender-area');
-			var player_dmg_text = $("<p>").addClass('playerDamageText');
-			var defender_dmg_text = $("<p>").addClass('defenderDamageText');	
-			var restart_btn = $("<button>").text('Restart').attr('id', 'restart').css('display', 'none');
+			const player_dmg_text = $("<p>").addClass('playerDamageText');
+			const defender_dmg_text = $("<p>").addClass('defenderDamageText');	
+			const restart_btn = $("<button>").text('Restart').attr('id', 'restart').css('display', 'none');
 			$("#row-5").append(title, char_list, player_dmg_text, defender_dmg_text, restart_btn);
 		},
-		player_attack: function() {
-			var defenderName = $(".defender-area .name").text();
-			var playerDamage = $(".player-area .character").data("attack-power");
-			var defenderHealth = $(".defender-area .character").data("hp");
-			var newDefenderHealth = defenderHealth - playerDamage;
-			$(".defender-area .character").data("hp", newDefenderHealth);
-			$(".defender-area .hp").text(newDefenderHealth);
-			$(".playerDamageText").text("You attacked " + defenderName + " for " + playerDamage + " damage");
+		player_attack: function(defender) {
+			let playerDamage = $(".player-area .character").data("attack-power");
+			let defenderHealth = $(".defender-area .character").data("hp");
+			defenderHealth -= playerDamage;
+			$(".defender-area .character").data("hp", defenderHealth);
+			$(".defender-area .hp").text(defenderHealth);
+			$(".playerDamageText").text("You attacked " + defender + " for " + playerDamage + " damage");
 			
 			// Add player's base Attack Power to their current Attack Power
 			playerDamage += starWarsRPG.baseAttackPower;
 			$(".player-area .character").data("attack-power", playerDamage);
 		},
-		counter_attack: function() {
-			var defenderName = $(".defender-area .name").text();
-			var defenderCounterDamage = $(".defender-area .character").data("counter-attack-power");
-			var playerHealth = $(".player-area .character").data("hp");
-			var newPlayerHealth = playerHealth - defenderCounterDamage;
-			$(".player-area .character").data("hp", newPlayerHealth);
-			$(".player-area .hp").text(newPlayerHealth);
-			$(".defenderDamageText").text(defenderName + " attacked you back for " + defenderCounterDamage + " damage");
+		counter_attack: function(defender) {
+			const defenderCounterDamage = $(".defender-area .character").data("counter-attack-power");
+			let playerHealth = $(".player-area .character").data("hp");
+			playerHealth -= defenderCounterDamage;
+			$(".player-area .character").data("hp", playerHealth);
+			$(".player-area .hp").text(playerHealth);
+			$(".defenderDamageText").text(defender + " attacked you back for " + defenderCounterDamage + " damage");
 		},
-		check_health: function() {
-			var playerHealth = $(".player-area .character").data("hp");
+		check_health: function(defender) {
+			const playerHealth = $(".player-area .character").data("hp");
 			if (playerHealth <= 0) {
 				starWarsRPG.gameover = true;
 				$(".playerDamageText").text("You have been defeated...GAME OVER!!!");
@@ -256,12 +252,11 @@ $(document).ready(function() {
 				$("#restart").css('display', 'block');
 			}
 
-			var defenderName = $(".defender-area .name").text();
-			var defenderHealth = $(".defender-area .character").data("hp");
+			const defenderHealth = $(".defender-area .character").data("hp");
 			if (defenderHealth <= 0) {
 				starWarsRPG.canFight = false;
 				$(".defender-area .character").remove();
-				$(".playerDamageText").text("You have defeated " + defenderName + ", you can choose to fight another enemy.");
+				$(".playerDamageText").text("You have defeated " + defender + ", you can choose to fight another enemy.");
 				$(".defenderDamageText").text('');
 
 				if($(".enemies-area").children().length === 0) {
@@ -275,12 +270,12 @@ $(document).ready(function() {
 		addListeners: function() {
 			$(".star-wars").off().on('click', '.character', function() {
 				if(!starWarsRPG.gameover) {
-					var location = $(this).parent()[0].classList[0];
-					if(location === "character-list" && $(".player-area").children().length === 0) {
+					const current_area = $(this).parent()[0].classList[0];
+					if(current_area === "character-list" && $(".player-area").children().length === 0) {
 						$(this).appendTo('.player-area');
 						$(".character-list").children().addClass('enemy').removeClass('available').appendTo('.enemies-area'); 
 						starWarsRPG.baseAttackPower = $(".player-area .character").data("attack-power");
-					}else if (location === "enemies-area" && $(".defender-area").children().length === 0) {
+					}else if (current_area === "enemies-area" && $(".defender-area").children().length === 0) {
 						$(this).appendTo('.defender-area').removeClass('enemy').addClass('defender').removeData('attack-power');
 						starWarsRPG.canFight = true;
 						$(".playerDamageText").text('');
@@ -288,12 +283,13 @@ $(document).ready(function() {
 				}
 			}).on('click', '#btn-attack', function(event) {
 				if(!starWarsRPG.gameover && starWarsRPG.canFight) {
-					starWarsRPG.player_attack();
-					starWarsRPG.check_health();
+					const defenderName = $(".defender-area .name").text();
+					starWarsRPG.player_attack(defenderName);
+					starWarsRPG.check_health(defenderName);
 
 					if (starWarsRPG.canFight) {
-						starWarsRPG.counter_attack();
-						starWarsRPG.check_health();
+						starWarsRPG.counter_attack(defenderName);
+						starWarsRPG.check_health(defenderName);
 					}
 				}else if (!starWarsRPG.canFight) {
 					$(".playerDamageText").text('Select an enemy to attack');
@@ -311,7 +307,7 @@ $(document).ready(function() {
 	var expanded = false;
 	$(".menu").on('click', '.btn-menu', function() {
 		if (!expanded) {
-			$(".menu").animate({width: '200px', height: '120px'}, 350).addClass('active');
+			$(".menu").animate({width: '200px', height: '190px'}, 350).addClass('active');
 			$(".menu-right").fadeIn('slow').css('display', 'flex');
 			expanded = true;
 		}else {
@@ -323,11 +319,17 @@ $(document).ready(function() {
 	}).on('click', '.game-sw', function(event) {
 		starWarsRPG.initialize_game();
 		closeMenu();
+	}).on('click', '.games button', function(event) {
+		$(".games button").removeClass('active');
+		$(this).addClass('active');
+	}).on('click', '.difficulty button', function(event) {
+		$(".difficulty button").removeClass('active');
+		$(this).addClass('active');
 	});
 
 	function closeMenu() {
 		$(".menu-right").hide();
-		$(".menu").animate({width: 0, height: 0}, 350).removeClass('active');
+		$(".menu").animate({width: '44px', height: '34px'}, 350).removeClass('active');
 		expanded = false;
 	}
 });

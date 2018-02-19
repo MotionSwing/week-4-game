@@ -3,7 +3,7 @@
 /*-------------------------*/
 
 .crystals-collector {
-	background-image: url(../images/circles-dark.png);
+	background-image: url(../images/spiration-light.png);
 }
 
 .crystals-collector h1 {
@@ -101,7 +101,6 @@
 	right: -5px;
 	top: 2px;
 	transform: rotate(-30deg);
-
 }
 
 /*-------------------*/
@@ -109,8 +108,9 @@
 /*-------------------*/
 
 .star-wars {
-	background-image: url(../images/xwing-bg.jpg);
-	background-size: cover;
+	background: url(../images/xwing-bg.jpg) no-repeat;
+	/*background-size: cover;*/
+	background-size: 100%;
 	font-family: Consolas,serif;
 	padding: 10px;
 	color: #000;
@@ -214,6 +214,10 @@
 	left: 10px;
 }
 
+.menu.active .btn-menu {
+	border: 0;
+}
+
 .btn-menu:hover {
 	background-color: #ddd;
 }
@@ -242,19 +246,14 @@
 	padding: 9px 10px;
 	border-radius: 4px;
 	background-color: #f8f8f8;
-	border: 1px solid #ddd;
+	border: 1px solid #aaa;
 	cursor: pointer;
 }
 
 .menu.active {	
 	background-color: #f8f8f8;
-	border: 1px solid #ddd;
+	border: 1px solid #aaa;
 	cursor: initial;
-}
-
-.menu.active .btn-menu {
-	border: 0;
-	background-color: #f8f8f8;
 }
 
 .menu-right {
@@ -279,10 +278,34 @@
 	outline: 0;
 }
 
-.game-cc:hover {
-	box-shadow: 0 0 20px #d60ad6;
+.games {
+	display: flex;
+	flex-flow: column;
 }
 
+.game-cc.active,
+.game-cc:hover {
+	box-shadow: 0 0 20px #d60ad6, inset 0 0 10px rgba(255,255,255,0.8);
+}
+
+.game-sw.active,
 .game-sw:hover {
-	box-shadow: 0 0 20px rgba(0,0,255,0.8);
+	box-shadow: 0 0 20px rgba(0,0,255,0.8), inset 0 0 10px rgba(255,255,255,0.8);
+}
+
+.difficulty {
+	display: flex;
+	justify-content: space-around;
+}
+
+.difficulty .easy.active,
+.difficulty .easy:hover {
+	box-shadow: 0 0 20px rgba(0,255,0,0.8),inset 0 0 10px rgba(255,255,255,0.8);
+	color: rgba(0,255,0,0.8);
+}
+
+.difficulty .hard.active,
+.difficulty .hard:hover {
+	box-shadow: 0 0 20px rgba(255,0,0,0.8), inset 0 0 10px rgba(255,255,255,0.8);
+	color: rgba(255,0,0,0.8);
 }
