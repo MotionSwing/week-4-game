@@ -198,6 +198,214 @@
 	height: 113px;
 }
 
+/*Style #2*/
+.star-wars.style-2 {
+	position: relative;
+	overflow: hidden;
+}
+
+.star-wars.style-2 .container {
+	height: 90vh;
+}
+
+.star-wars.style-2 #row-1 {
+	position: relative;
+}
+
+.star-wars.style-2 #row-1 h1 {
+	text-align: center;
+    margin: 0;
+}
+
+.star-wars.style-2 .character-list .character,
+.star-wars.style-2 .enemies-area .character {
+	border-radius: 10px;
+	margin-right: 10px;
+}
+
+.star-wars.style-2 .character-list .character:last-of-type,
+.star-wars.style-2 .enemies-area .character:last-of-type {
+	margin-right: 0;
+}
+
+.star-wars.style-2 #row-1 .character-list {
+	position: absolute;
+    top: 300%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.star-wars.style-2 #row-1 .character-list::before {
+    content: '';
+    position: absolute;
+    background-color: rgba(85, 85, 85, 0.7);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 110%;
+    height: 161%;
+    z-index: -1;
+}
+
+.star-wars.style-2 #row-1 .character-list::after {
+	content: 'Select a Character:';
+	position: absolute;
+	top: -1em;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	font-weight: bold;
+}
+
+.star-wars.style-2 #row-3 {
+    position: absolute;
+    bottom: -37%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    transition: bottom 200ms 200ms linear;
+}
+
+.star-wars.style-2 #row-3:hover {
+	bottom: -18%;
+}
+
+.star-wars.style-2 #row-4 {
+    position: absolute;
+    top: 57%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.star-wars.style-2 #btn-attack {
+	position: relative;
+    border-radius: 50%;
+    width: 100px;
+    height: 50px;
+    outline: 0;
+    border: 1px solid #000;
+    background-color: #f00;
+    font-weight: 600;
+    box-shadow: -5px 5px 20px rgba(0,0,0,0.9);
+    color: #222;
+    cursor: pointer;
+    transition: all 300ms 300ms ease;
+}
+
+.star-wars.style-2 #btn-attack:hover {
+	box-shadow: -1px 1px 20px rgba(0,0,0,0.9);
+	top: 5px;
+}
+
+.star-wars.style-2 #row-5 {
+position: absolute;
+    right: 10px;
+    top: 60px;
+    display: flex;
+    flex-flow: column;
+    text-align: right;
+}
+
+.star-wars.style-2 #row-5 button,
+.star-wars.style-2 #row-5 p {
+	position: fixed;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	bottom: 5rem;
+	width: 100%;
+	text-align: center;
+	z-index: -1;
+}
+
+.star-wars.style-2 #row-5 .playerDamageText {
+	bottom: calc(5rem + 1rem);
+}
+
+.star-wars.style-2 #row-5 button {
+	bottom: calc(5rem - 1.3em);
+	width: initial;
+	z-index: initial;
+}
+
+.star-wars.style-2 .player-area .character {
+	align-items: flex-start;
+}
+
+.star-wars.style-2 .defender-area .character {
+	align-items: flex-end;
+}
+
+.star-wars.style-2 .player-area .character,
+.star-wars.style-2 .defender-area .character {
+	font-weight: 800;
+	background-color: transparent;
+	border: 0;
+	color: #000;
+	width: 160px;
+	transform: scale(2);
+}
+
+.star-wars.style-2 .player-area .character {
+	position: relative;
+    left: 75px;
+    top: 60px;
+}
+
+.star-wars.style-2 .defender-area .character {
+	position: relative;
+    right: 75px;
+    top: 60px;
+}
+
+.star-wars.style-2 .player-area .name,
+.star-wars.style-2 .defender-area .name {
+	background-color: rgba(0,0,0,.8);
+    color: #fff;
+    padding: 0 5px;
+}
+
+.star-wars.style-2 .player-area .character img,
+.star-wars.style-2 .defender-area .character img {
+	margin: 0;
+	order: 3;
+	border: 1px solid #000;
+}
+
+.progress {
+	display: none;
+	height: 1rem;
+	background-color: #f00;
+}
+
+.star-wars.style-2 .player-area .progress,
+.star-wars.style-2 .defender-area .progress {
+	display: flex;
+	position: relative;
+	width: 100%;
+    border: 1px solid #fff;
+    box-shadow: inset 0 0 7px rgba(0,0,0,0.6);
+}
+
+.star-wars.style-2 .defender-area .progress {
+	display: block;
+}
+
+.star-wars.style-2 .player-area .hp,
+.star-wars.style-2 .defender-area .hp {
+	display: none;
+}
+
+.star-wars.style-2 .character .progress-bar {
+	background-color: #0f0;
+	color: #000;
+	box-shadow: inset 0 0 7px rgba(0,0,0,0.6);
+	line-height: .875rem;
+}
+
+.star-wars.style-2 .defender-area .progress-bar {
+	float: right;
+}
+
 /*-----------------*/
 /*----Game Menu----*/
 /*-----------------*/
@@ -295,7 +503,11 @@
 
 .difficulty {
 	display: flex;
-	justify-content: space-around;
+	justify-content: center;
+}
+
+.difficulty .easy {
+	margin-right: 10px;
 }
 
 .difficulty .easy.active,
@@ -308,4 +520,18 @@
 .difficulty .hard:hover {
 	box-shadow: 0 0 20px rgba(255,0,0,0.8), inset 0 0 10px rgba(255,255,255,0.8);
 	color: rgba(255,0,0,0.8);
+}
+
+.styles {
+	display: flex;
+	justify-content: center;
+}
+
+.styles button.active,
+.styles button:hover {
+	box-shadow: 0 0 20px rgba(0,0,255,0.8), inset 0 0 10px rgba(255,255,255,0.8);
+}
+
+.styles .style-1 {
+	margin-right: 10px;
 }
