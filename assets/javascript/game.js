@@ -93,7 +93,6 @@ $(document).ready(function() {
 				crystalsCollector.wins++;
 				$("#wins").text("Wins: " + crystalsCollector.wins);
 
-				// alert("You won!!");
 				crystalsCollector.display_outcome("You won!!");
 				crystalsCollector.change_colors();
 				crystalsCollector.start_game();
@@ -101,7 +100,6 @@ $(document).ready(function() {
 				crystalsCollector.losses++;
 				$("#losses").text("Losses: " + crystalsCollector.losses);
 
-				// alert("You Lost!!");
 				crystalsCollector.display_outcome("You Lost!!");
 				crystalsCollector.change_colors();
 				crystalsCollector.start_game();
@@ -210,8 +208,9 @@ $(document).ready(function() {
 			starWarsRPG.canFight = false;
 			starWarsRPG.baseAttackPower = 0;
 			starWarsRPG.gameover = false;
-			starWarsRPG.playerBaseHP = null,
-			starWarsRPG.defenderBaseHP = null,
+			starWarsRPG.playerBaseHP = null;
+			starWarsRPG.defenderBaseHP = null;
+
 			$(document).attr('title', 'Star Wars RPG Game');
 
 			if($("body").hasClass('crystals-collector')) {
@@ -285,6 +284,14 @@ $(document).ready(function() {
 			const defender_dmg_text = $("<p>").addClass('defenderDamageText');	
 			const restart_btn = $("<button>").text('Restart').attr('id', 'restart').css('display', 'none');
 			$("#row-5").append(title, char_list, player_dmg_text, defender_dmg_text, restart_btn);
+			
+			// Hard Mode - randomly generate the attack and counter attack values
+			// for all characters.
+			if ($(".difficulty .hard").hasClass('active')) {
+				starWarsRPG.generate_attack_values();
+			}else if($(".difficulty .easy").hasClass('active')){
+				starWarsRPG.reset_attack_values();
+			}
 		},
 		player_attack: function(defender) {
 			let playerDamage = $(".player-area .character").data("attack-power");
@@ -294,9 +301,12 @@ $(document).ready(function() {
 			$(".defender-area .hp").text(defenderHealth);
 			
 			// Update Progress Bars
-			$(".style-2 .defender-area .progress-bar").css('width', (defenderHealth / starWarsRPG.defenderBaseHP) * 100 + '%').text(defenderHealth);
-			$(".style-3 .defender-area .progress-bar").animate({width: (defenderHealth / starWarsRPG.defenderBaseHP) * 100 + '%'}, 500).text(defenderHealth);
-			$(".style-3 .defender-area .progress-bar-preview").fadeIn('400').text(playerDamage).animate({width: (playerDamage / starWarsRPG.defenderBaseHP) * 100 + '%'}, 500).fadeOut('700');
+			if($("body").hasClass('style-3')){
+				$(".style-3 .defender-area .progress-bar").animate({width: (defenderHealth / starWarsRPG.defenderBaseHP) * 100 + '%'}, 500).text(defenderHealth);
+				$(".style-3 .defender-area .progress-bar-preview").removeClass('dropHealth').fadeIn('400').text(playerDamage).animate({width: (playerDamage / starWarsRPG.defenderBaseHP) * 100 + '%'}, 500).addClass('dropHealth');
+			}else {
+				$(".defender-area .progress-bar").css('width', (defenderHealth / starWarsRPG.defenderBaseHP) * 100 + '%').text(defenderHealth);
+			}
 
 			$(".playerDamageText").text("You attacked " + defender + " for " + playerDamage + " damage");
 			
@@ -312,9 +322,12 @@ $(document).ready(function() {
 			$(".player-area .hp").text(playerHealth);
 
 			// Update Progress Bars
-			$(".style-2 .player-area .progress-bar").css('width', (playerHealth / starWarsRPG.playerBaseHP) * 100 + '%').text(playerHealth);
-			$(".style-3 .player-area .progress-bar").animate({width: (playerHealth / starWarsRPG.playerBaseHP) * 100 + '%'}, 500).text(playerHealth);
-			$(".style-3 .player-area .progress-bar-preview").fadeIn('400').text(defenderCounterDamage).animate({width: (defenderCounterDamage / starWarsRPG.playerBaseHP) * 100 + '%'}, 500).fadeOut('700');
+			if($("body").hasClass('style-3')){
+				$(".style-3 .player-area .progress-bar").animate({width: (playerHealth / starWarsRPG.playerBaseHP) * 100 + '%'}, 500).text(playerHealth);
+				$(".style-3 .player-area .progress-bar-preview").removeClass('dropHealth').fadeIn('400').text(defenderCounterDamage).animate({width: (defenderCounterDamage / starWarsRPG.playerBaseHP) * 100 + '%'}, 500).addClass('dropHealth');
+			}else {
+				$(".player-area .progress-bar").css('width', (playerHealth / starWarsRPG.playerBaseHP) * 100 + '%').text(playerHealth);
+			}
 
 			$(".defenderDamageText").text(defender + " attacked you back for " + defenderCounterDamage + " damage");
 		},
@@ -380,6 +393,24 @@ $(document).ready(function() {
 					starWarsRPG.restart_game();	
 				}
 			});
+		},
+		generate_attack_values: function() {
+			for (let i = 0; i < starWarsRPG.characters.length; i++) {
+				const char = $(".char-" + (i + 1));
+				char.data({
+					"attack-power": Math.floor(Math.random() * (15 - 5)) + 5,
+					"counter-attack-power": Math.floor(Math.random() * (30 - 5)) + 5
+				});
+			}
+		},
+		reset_attack_values: function() {
+			for (let i = 0; i < starWarsRPG.characters.length; i++) {
+				const char = $(".char-" + (i + 1));
+				char.data({
+					"attack-power": starWarsRPG.characters[i].base_attack,
+					"counter-attack-power": starWarsRPG.characters[i].counter_attack
+				});
+			}
 		}
 	};
 
@@ -406,6 +437,13 @@ $(document).ready(function() {
 	}).on('click', '.difficulty button', function(event) {
 		$(".difficulty button").removeClass('active');
 		$(this).addClass('active');
+
+		if($(this).hasClass('hard')){
+			starWarsRPG.generate_attack_values();
+		}else if($(this).hasClass('easy')){
+			starWarsRPG.reset_attack_values();
+		}
+		closeMenu();
 	}).on('click', '.styles button', function(event) {
 		$(".styles button").removeClass('active');
 		$(this).addClass('active');
@@ -427,7 +465,7 @@ $(document).ready(function() {
 			$("body").removeClass('style-2 style-3');
 			$("#row-4 h3").show();
 		}
-
+		closeMenu();
 	});
 
 	function closeMenu() {

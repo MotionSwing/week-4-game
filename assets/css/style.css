@@ -47,7 +47,6 @@
 }
 
 #option-4 {
-	/*background-position: -179px -90px;*/
 	background-position: -129px -10px;
     min-width: 57px;
     width: 57px;
@@ -149,6 +148,11 @@
     border: 1px solid #aaa;
     border-radius: 5px;
     cursor: pointer;
+}
+
+.crystals-collector h2:last-of-type,
+.crystals-collector .styles {
+	display: none;
 }
 
 /*-------------------*/
@@ -580,6 +584,82 @@
 	display: none;
 }
 
+.star-wars.style-3 .progress {
+	overflow: visible;
+}
+
+.star-wars.style-3 .dropHealth {
+	position: relative;
+	animation: fadeout 2s forwards;
+}
+
+@keyframes fadeout {
+	0% { opacity: 1; }
+	100% { opacity: 0; }
+}
+
+.star-wars.style-3 .dropHealth::after {
+    content: 'HP';
+    position: absolute;
+    font-size: 1rem;
+    color: #f00;
+    box-shadow: none;
+    top: 0;
+}
+
+.star-wars.style-3 .player-area .dropHealth::after {
+	transform: skew(-30deg);
+	right: 50%;
+	animation: drop_left 2s forwards;
+}
+
+.star-wars.style-3 .defender-area .dropHealth::after {
+	transform: skew(30deg);
+	left: 50%;
+	animation: drop_right 2s forwards;
+}
+
+@keyframes drop_right {
+	0% {
+		left: 50%;
+		top: 0;
+	}
+
+	20% {
+		left: 100%
+		top: 50%;
+	}
+	70% {
+		left: 150%;
+		top: 200%;
+	}
+	100% {
+		left: 200%;
+		top: 700%;
+	}
+}
+
+@keyframes drop_left {
+	0% {
+		right: 50%;
+		top: 0;
+		opacity: 1;
+	}
+
+	20% {
+		right: 100%
+		top: 50%;
+	}
+	70% {
+		right: 150%;
+		top: 200%;
+	}
+	100% {
+		right: 200%;
+		top: 700%;
+		opacity: 0;
+	}
+}
 
 /*-----------------*/
 /*----Game Menu----*/
@@ -595,6 +675,7 @@
 	border-radius: 4px;
 	cursor: pointer;
 	left: 10px;
+	z-index: 999;
 }
 
 .menu.active .btn-menu {
