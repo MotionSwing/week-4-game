@@ -721,6 +721,8 @@
 .star-wars .locations:hover .endor {bottom: 220px;}
 .star-wars .locations:hover .jakku {bottom: 330px;}
 
+.hide {display: none;}
+
 /*-----------------*/
 /*----Game Menu----*/
 /*-----------------*/
@@ -800,10 +802,7 @@
 	outline: 0;
 }
 
-.games {
-	display: flex;
-	flex-flow: column;
-}
+.games {display: flex;flex-flow: column;}
 
 .game-cc.active,
 .game-cc:hover {box-shadow: 0 0 20px #d60ad6, inset 0 0 10px rgba(255,255,255,0.8);}
@@ -811,10 +810,7 @@
 .game-sw.active,
 .game-sw:hover {box-shadow: 0 0 20px rgba(0,0,255,0.8), inset 0 0 10px rgba(255,255,255,0.8);}
 
-.difficulty {
-	display: flex;
-	justify-content: center;
-}
+.difficulty {display: flex; justify-content: center;}
 
 .difficulty .easy {margin-right: 10px;}
 

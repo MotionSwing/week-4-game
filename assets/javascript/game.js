@@ -275,7 +275,8 @@ $(document).ready(function() {
 			fight_btn = $("<button>").attr('id', 'btn-attack').text('Attack');
 			$("#row-4").append(title, fight_btn);
 
-			$(".star-wars.style-2 #row-4 h3, .star-wars.style-3 #row-4 h3").hide();
+			// TODO: replace .hide() with a class that sets the display to none
+			$(".star-wars.style-2 #row-4 h3, .star-wars.style-3 #row-4 h3").addClass('hide');
 
 			// Row 5
 			title = $("<h3>").text("Defender");
@@ -343,7 +344,9 @@ $(document).ready(function() {
 				$(".playerDamageText").text("You have been defeated...GAME OVER!!!");
 				$(".defenderDamageText").text('');
 				$("#restart").css('display', 'block').addClass('sw-restart');
-				$(".star-wars.style-2 #row-4, .star-wars.style-3 #row-4").hide();
+
+				// TODO: replace .hide() with a class that sets the display to none
+				$(".star-wars.style-2 #row-4, .star-wars.style-3 #row-4").addClass('hide');
 			}
 
 			const defenderHealth = $(".defender-area .character").data("hp");
@@ -360,7 +363,9 @@ $(document).ready(function() {
 					$(".playerDamageText").text("You Won!!!! GAME OVER!!!");
 					$(".defenderDamageText").text('');
 					$("#restart").css('display', 'block').addClass('sw-restart');
-					$(".star-wars.style-2 #row-4, .star-wars.style-3 #row-4").hide();
+
+					// TODO: replace .hide() with a class that sets the display to none
+					$(".star-wars.style-2 #row-4, .star-wars.style-3 #row-4").addClass('hide');
 				}
 			}
 		},
@@ -459,13 +464,17 @@ $(document).ready(function() {
 
 		if ($(this).hasClass('style-2')) {
 			$("body").removeClass('style-3').addClass('style-2');
-			$(".star-wars.style-2 #row-4 h3").hide();
+
+			// TODO: replace .hide() with a class that sets the display to none
+			$(".star-wars.style-2 #row-4 h3").addClass('hide');
 			if($(".player-area").children().length > 0) {
 				$(".star-wars.style-2 .character-list").hide();
 			}
 		}else if($(this).hasClass('style-3')){
 			$("body").removeClass('style-2').addClass('style-3');
-			$(".star-wars.style-3 #row-4 h3").hide();
+
+			// TODO: replace .hide() with a class that sets the display to none
+			$(".star-wars.style-3 #row-4 h3").addClass('hide');
 			if($(".player-area").children().length > 0) {
 				$(".star-wars.style-3 .character-list").hide();
 			}
