@@ -90,8 +90,9 @@
 }
 
 .hide-show:hover {
-	box-shadow: 0 0 10px rgba(0,0,0,0.6), inset 0 0 10px rgba(0,0,0,0.6); 
-	color: #777;
+	/*box-shadow: 0 0 10px rgba(0,0,0,0.6), inset 0 0 10px rgba(0,0,0,0.6); */
+	box-shadow: 0 0 10px rgba(0,0,0,0.6);
+	/*color: #777;*/
 }
 
 .hide-show:hover::after {
@@ -99,10 +100,16 @@
 	position: absolute;
 	width: 115%;
 	height: 100%;
-	background: linear-gradient(-8deg, transparent 0%, rgba(0,0,0,0.3) 50%, transparent 100%);
+	background: linear-gradient(-8deg, transparent 0%, rgba(255,255,255,0.8) 50%, transparent 100%);
 	right: -5px;
 	top: 2px;
 	transform: rotate(-30deg);
+	animation: move_shine 700ms forwards;
+}
+
+@keyframes move_shine {
+	0% {left: -100%;}
+	100% {left: 100%;}
 }
 
 .outcome {
@@ -159,10 +166,15 @@
 /*----Star Wars -----*/
 /*-------------------*/
 
+@font-face {
+	font-family: "Star Wars";
+	src: url(../fonts/Starjedi.ttf);
+}
+
 .star-wars {
 	background: url(../images/xwing-bg.jpg) no-repeat;
-	/*background-size: cover;*/
 	background-size: 100%;
+	background-color: #777;
 	font-family: Consolas,serif;
 	padding: 10px;
 	color: #000;
@@ -185,6 +197,12 @@
 	font-size: 40px;
 	text-align: right;
 	margin-right: 100px;
+}
+
+.star-wars.style-3 h1 {
+	font-family: "Star Wars", consolas;
+	color: #ff0;
+	text-shadow: 0 0 5px #000, 0 0 5px #000;
 }
 
 .star-wars h3 {
@@ -351,7 +369,7 @@
 .star-wars.style-3 #btn-attack,
 .star-wars.style-2 #btn-attack {
 	position: relative;
-    border-radius: 50% / 80px;
+	top: 100px;
     width: 100px;
     height: 50px;
     outline: 0;
@@ -360,6 +378,7 @@
     font-weight: 600;
     box-shadow: -5px 5px 20px rgba(0,0,0,0.9);
     color: #222;
+    border-radius: 50% / 80px;
     cursor: pointer;
     transition: all 300ms 300ms ease;
 }
@@ -367,7 +386,7 @@
 .star-wars.style-3 #btn-attack:hover,
 .star-wars.style-2 #btn-attack:hover {
 	box-shadow: -1px 1px 20px rgba(0,0,0,0.9), inset 0 0 5px #000;
-    top: 5px;
+    top: 105px;
 }
 
 .star-wars.style-3 #row-5,
@@ -471,7 +490,7 @@
     background-color: transparent;
     text-shadow: 0px 0px 1px #000, 0px 0px 1px #000;
     position: relative;
-    top: 4px;
+    top: -35px;
     font-size: .875em;
 }
 
@@ -492,6 +511,41 @@
 .star-wars.style-3 .defender-area .character img {
 	top: 50%;
 	border-radius: .25rem;
+	position: absolute;
+}
+
+.star-wars.style-3 .defender-area .char-1 img,
+.star-wars.style-3 .player-area .char-1 img {
+	display: block;
+	background: url(../images/obi_wan_kenobi.png) no-repeat;
+	background-size: cover;
+	width: 190px; /* Width of new image */
+	height: 150px; /* Height of new image */
+	padding-left: 190px; /* Equal to width of new image*/ 	
+	border: 0;
+}
+
+.star-wars.style-3 .defender-area .char-1 img {
+	transform: rotateY(180deg);
+}
+
+.star-wars.style-3 .player-area .char-2 img,
+.star-wars.style-3 .defender-area .char-2 img {
+	display: block;
+	background: url(../images/luke_skywalker.png) no-repeat;
+    background-size: 50%;
+    width: 190px;
+    height: 165px;
+    padding-left: 190px;
+    border: 0;
+    right: -26%;
+    top: 45%;
+}
+
+.star-wars.style-3 .player-area .char-2 img {
+	transform: rotateY(180deg);
+	right: initial;
+	left: -30%;
 }
 
 .star-wars.style-3 .player-area .hp,
@@ -661,6 +715,33 @@
 	}
 }
 
+.ko-player,
+.ko-defender {
+    font-size: 80px;
+    position: relative;
+    right: 5%;
+    top: 160%;
+    color: #f00;
+    text-shadow: 0px 0px 30px #000, 0px 0px 15px #000;
+    user-select: none;
+}
+
+.ko-player {
+	left: 5%;
+	right: initial;
+}
+
+.star-wars.style-3 .sw-restart {
+	opacity: 1;
+	animation: flash 1100ms 3;
+}
+
+@keyframes flash {
+	0% {opacity: 1;}
+	50% {opacity: 0;}
+	100% {opacity: 1;}
+}
+
 /*-----------------*/
 /*----Game Menu----*/
 /*-----------------*/
@@ -792,4 +873,12 @@
 
 .styles .style-1 {
 	margin-right: 10px;
+}
+
+@media screen and (max-width: 767.98px) {
+	.star-wars .character img,
+	.star-wars .character img {
+		width: 80px;
+    	height: 40px;
+	}
 }
