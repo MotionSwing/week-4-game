@@ -214,9 +214,9 @@ $(document).ready(function() {
 			$(document).attr('title', 'Star Wars RPG Game');
 
 			if($("body").hasClass('crystals-collector')) {
-				$("body").removeClass('crystals-collector').addClass('star-wars');
+				$("body").removeClass('crystals-collector').addClass('star-wars bg-hoth');
 			}else {
-				$("body").addClass('star-wars');
+				$("body").addClass('star-wars bg-hoth');
 			}
 			
 
@@ -426,12 +426,12 @@ $(document).ready(function() {
 
 	starWarsRPG.initialize_game();
 	
-	var expanded = false;
+	var menu_expanded = false;
 	$(".menu").on('click', '.btn-menu', function() {
-		if (!expanded) {
+		if (!menu_expanded) {
 			$(".menu").animate({width: '210px', height: '290px'}, 350).addClass('active');
 			$(".menu-right").fadeIn('slow').css('display', 'flex');
-			expanded = true;
+			menu_expanded = true;
 		}else {
 			closeMenu();
 		}
@@ -478,6 +478,35 @@ $(document).ready(function() {
 	function closeMenu() {
 		$(".menu-right").hide();
 		$(".menu").animate({width: '44px', height: '34px'}, 350).removeClass('active');
-		expanded = false;
+		menu_expanded = false;
 	}
+
+	 $(".locations").on('click', '.hoth', function(event) {
+	 	$("body").removeClassPrefix("bg-").addClass('bg-hoth');
+	 	$(".locations li").removeClass('active');
+	 	$(this).addClass('active');
+	 }).on('click', '.mustafar', function(event) {
+	 	$("body").removeClassPrefix("bg-").addClass('bg-mustafar');
+	 	$(".locations li").removeClass('active');
+	 	$(this).addClass('active');
+	 }).on('click', '.endor', function(event) {
+	 	$("body").removeClassPrefix("bg-").addClass('bg-endor');
+	 	$(".locations li").removeClass('active');
+	 	$(this).addClass('active');
+	 }).on('click', '.jakku', function(event) {
+	 	$("body").removeClassPrefix("bg-").addClass('bg-jakku');
+	 	$(".locations li").removeClass('active');
+	 	$(this).addClass('active');
+	 });;
+
+	 $.fn.removeClassPrefix = function(prefix) {
+	 	this.each(function(i, el) {
+	 		const classes = el.className.split(" ").filter(function(c) {
+	 			return c.lastIndexOf(prefix, 0) !== 0;
+	 		});
+	 		el.className = $.trim(classes.join(" "));
+	 	});
+	 	return this;
+	 };
+
 });

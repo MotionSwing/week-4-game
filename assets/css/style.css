@@ -172,12 +172,32 @@
 }
 
 .star-wars {
-	background: url(../images/xwing-bg.jpg) no-repeat;
-	background-size: 100%;
 	background-color: #777;
 	font-family: Consolas,serif;
 	padding: 10px;
 	color: #000;
+}
+
+.star-wars.bg-hoth {
+	background: url(../images/xwing-bg.jpg) no-repeat center center fixed;
+	background-size: cover;
+}
+
+.star-wars.bg-mustafar {
+	background: url(../images/sw-bg-3.jpg) no-repeat center center fixed;
+	background-size: cover;
+	color: #ff0;
+}
+
+.star-wars.bg-endor {
+	background: url(../images/sw-bg-4.jpg) no-repeat center center fixed;
+	background-size: cover;
+	color: #fff;
+}
+
+.star-wars.bg-jakku {
+	background: url(../images/sw-bg-2.jpg) no-repeat center center fixed;
+	background-size: cover;
 }
 
 .star-wars .container {
@@ -186,18 +206,8 @@
 	margin: 0;
 }
 
-.star-wars h1,
-.star-wars h3,
-.star-wars ul,
-.star-wars p  {
-	margin-bottom: 0;
-}
-
-.star-wars h1 {
-	font-size: 40px;
-	text-align: right;
-	margin-right: 100px;
-}
+.star-wars h1,.star-wars h3,.star-wars ul,.star-wars p  {margin-bottom: 0;}
+.star-wars h1 {font-size: 40px; text-align: right; margin-right: 100px;}
 
 .star-wars.style-3 h1 {
 	font-family: "Star Wars", consolas;
@@ -205,18 +215,10 @@
 	text-shadow: 0 0 5px #000, 0 0 5px #000;
 }
 
-.star-wars h3 {
-	font-size: 28px;
-	line-height: 28px;
-}
+.star-wars h3 {	font-size: 28px; line-height: 28px;}
+.star-wars p {line-height: 16px;}
 
-.star-wars p {
-	line-height: 16px;
-}
-
-.character-list {
-	display: flex;
-}
+.character-list {display: flex;}
 
 .character {
 	display: flex;
@@ -231,80 +233,40 @@
 	max-width: 174px;
 }
 
-.available {
-	background-color: #fff;
-	border: 2px solid #00e700;
-}
+.available {background-color: #fff;	border: 2px solid #00e700; color: #000;}
 
-.character img {
-	width: 150px;
-	height: 75px;
-	margin: 0 5px;	
-}
+.character img {width: 150px; height: 75px;	margin: 0 5px;}
 
-.enemy {
-	background-color: #f00;
-	border: 2px solid #000;
-}
+.enemy {background-color: #f00;	border: 2px solid #000;}
+.defender {	background-color: #000;	border: 2px solid green; color: #fff;}
 
-.defender {
-	background-color: #000;
-	border: 2px solid green;
-	color: #fff;
-}
+.player-area,.enemies-area,.defender-area {display: flex;}
 
-.player-area,
-.enemies-area,
-.defender-area {
-	display: flex;
-}
-
-.player-area {
-	height: 113px;
-}
-
-.defender-area {
-	flex-flow: column nowrap;
-	height: 113px;
-}
+.player-area {height: 113px;}
+.defender-area {flex-flow: column nowrap; height: 113px;}
 
 /*Style #2 & #3*/
 .star-wars.style-3,
-.star-wars.style-2 {
-	position: relative;
-	overflow: hidden;
-}
+.star-wars.style-2 {position: relative;	overflow: hidden;}
 
 .star-wars.style-3 .container,
-.star-wars.style-2 .container {
-	height: 90vh;
-}
+.star-wars.style-2 .container {height: 90vh;}
 
 .star-wars.style-3 #row-1,
-.star-wars.style-2 #row-1 {
-	position: relative;
-}
+.star-wars.style-2 #row-1 {position: relative;}
 
 .star-wars.style-3 #row-1 h1,
-.star-wars.style-2 #row-1 h1 {
-	text-align: center;
-    margin: 0;
-}
+.star-wars.style-2 #row-1 h1 {text-align: center; margin: 0;}
 
 .star-wars.style-3 .character-list .character,
 .star-wars.style-3 .enemies-area .character,
 .star-wars.style-2 .character-list .character,
-.star-wars.style-2 .enemies-area .character {
-	border-radius: 10px;
-	margin-right: 10px;
-}
+.star-wars.style-2 .enemies-area .character {border-radius: 10px; margin-right: 10px;}
 
 .star-wars.style-3 .character-list .character:last-of-type,
 .star-wars.style-3 .enemies-area .character:last-of-type,
 .star-wars.style-2 .character-list .character:last-of-type,
-.star-wars.style-2 .enemies-area .character:last-of-type {
-	margin-right: 0;
-}
+.star-wars.style-2 .enemies-area .character:last-of-type {margin-right: 0;}
 
 .star-wars.style-3 #row-1 .character-list,
 .star-wars.style-2 #row-1 .character-list {
@@ -314,10 +276,7 @@
     transform: translate(-50%, -50%);
 }
 
-.star-wars.style-3 #row-1 .character-list {
-	z-index: 1;
-}
-
+.star-wars.style-3 #row-1 .character-list {	z-index: 1;}
 .star-wars.style-3 #row-1 .character-list::before,
 .star-wars.style-2 #row-1 .character-list::before {
     content: '';
@@ -353,9 +312,7 @@
 }
 
 .star-wars.style-3 #row-3:hover,
-.star-wars.style-2 #row-3:hover {
-	bottom: -18%;
-}
+.star-wars.style-2 #row-3:hover {bottom: -18%;}
 
 .star-wars.style-3 #row-4,
 .star-wars.style-2 #row-4 {
@@ -381,6 +338,7 @@
     border-radius: 50% / 80px;
     cursor: pointer;
     transition: all 300ms 300ms ease;
+    z-index: 2;
 }
 
 .star-wars.style-3 #btn-attack:hover,
@@ -416,9 +374,7 @@
 }
 
 .star-wars.style-3 #row-5 .playerDamageText,
-.star-wars.style-2 #row-5 .playerDamageText {
-	bottom: calc(5rem + 1rem);
-}
+.star-wars.style-2 #row-5 .playerDamageText {bottom: calc(5rem + 1rem);}
 
 .star-wars.style-3 #row-5 button,
 .star-wars.style-2 #row-5 button {
@@ -428,14 +384,10 @@
 }
 
 .star-wars.style-3 .player-area .character,
-.star-wars.style-2 .player-area .character {
-	align-items: flex-start;
-}
+.star-wars.style-2 .player-area .character {align-items: flex-start;}
 
 .star-wars.style-3 .defender-area .character,
-.star-wars.style-2 .defender-area .character {
-	align-items: flex-end;
-}
+.star-wars.style-2 .defender-area .character {align-items: flex-end;}
 
 .star-wars.style-3 .player-area .character,
 .star-wars.style-3 .defender-area .character,
@@ -525,9 +477,7 @@
 	border: 0;
 }
 
-.star-wars.style-3 .defender-area .char-1 img {
-	transform: rotateY(180deg);
-}
+.star-wars.style-3 .defender-area .char-1 img {transform: rotateY(180deg);}
 
 .star-wars.style-3 .player-area .char-2 img,
 .star-wars.style-3 .defender-area .char-2 img {
@@ -560,9 +510,7 @@
     top: 40%;
 }
 
-.star-wars.style-3 .defender-area .char-3 img {
-	transform: rotateY(180deg);
-}
+.star-wars.style-3 .defender-area .char-3 img {transform: rotateY(180deg);}
 
 
 .star-wars.style-3 .player-area .char-4 img,
@@ -587,14 +535,9 @@
 .star-wars.style-3 .player-area .hp,
 .star-wars.style-3 .defender-area .hp,
 .star-wars.style-2 .player-area .hp,
-.star-wars.style-2 .defender-area .hp {
-	display: none;
-}
+.star-wars.style-2 .defender-area .hp {display: none;}
 
-.progress {
-	display: none;
-	background-color: #f00;
-}
+.progress {display: none; background-color: #f00;}
 
 .star-wars.style-3 .player-area .progress,
 .star-wars.style-3 .defender-area .progress,
@@ -618,19 +561,10 @@
     box-shadow: 0 0 7px rgba(0,0,0,0.6), inset 0 0 7px rgba(0,0,0,0.6);
 }
 
-.star-wars.style-3 .player-area .progress {
-	transform: skew(30deg);
-    left: 0;
-}
+.star-wars.style-3 .player-area .progress {transform: skew(30deg); left: 0;}
+.star-wars.style-3 .defender-area .progress {transform: skew(-30deg); right: 0;}
 
-.star-wars.style-3 .defender-area .progress {
-	transform: skew(-30deg);
-    right: 0;
-}
-
-.star-wars.style-3 .character {
-	max-width: initial;
-}
+.star-wars.style-3 .character {	max-width: initial;}
 
 .star-wars.style-3 .player-area .progress,
 .star-wars.style-2 .defender-area .progress {
@@ -651,37 +585,19 @@
 	line-height: .875rem;
 }
 
-.star-wars.style-3 .character .progress {
-	background: transparent;
-}
-
-.star-wars.style-2 .character .progress-bar-preview {
-	display: none;
-}
-
+.star-wars.style-3 .character .progress {background: transparent;}
+.star-wars.style-2 .character .progress-bar-preview {display: none;}
 .star-wars.style-3 .character .progress-bar-preview {
 	background: linear-gradient(#fff 0%, #c30000 30%, #c30000 85%, #fff 100%);
-	/*color: #c30000;*/
 }
 
 .star-wars.style-3 .character .progress-bar {
 	background: linear-gradient(#fff 0%, #33c 30%, #33c 85%, #fff 100%);
-	/*color: #33c;*/
 }
 
-.star-wars.style-3 #row-2 h3,
-.star-wars.style-3 #row-5 h3 {
-	display: none;
-}
-
-.star-wars.style-3 .progress {
-	overflow: visible;
-}
-
-.star-wars.style-3 .dropHealth {
-	position: relative;
-	animation: fadeout 2s forwards;
-}
+.star-wars.style-3 #row-2 h3,.star-wars.style-3 #row-5 h3 {display: none;}
+.star-wars.style-3 .progress {overflow: visible;}
+.star-wars.style-3 .dropHealth {position: relative;	animation: fadeout 2s forwards;}
 
 @keyframes fadeout {
 	0% { opacity: 1; }
@@ -710,45 +626,17 @@
 }
 
 @keyframes drop_right {
-	0% {
-		left: 50%;
-		top: 0;
-	}
-
-	20% {
-		left: 100%
-		top: 50%;
-	}
-	70% {
-		left: 150%;
-		top: 200%;
-	}
-	100% {
-		left: 200%;
-		top: 700%;
-	}
+	0% {left: 50%; top: 0;}
+	20% {left: 100%; top: 50%;}
+	70% {left: 150%; top: 200%;}
+	100% {left: 200%; top: 700%;}
 }
 
 @keyframes drop_left {
-	0% {
-		right: 50%;
-		top: 0;
-		opacity: 1;
-	}
-
-	20% {
-		right: 100%
-		top: 50%;
-	}
-	70% {
-		right: 150%;
-		top: 200%;
-	}
-	100% {
-		right: 200%;
-		top: 700%;
-		opacity: 0;
-	}
+	0% {right: 50%;	top: 0;	opacity: 1;}
+	20% {right: 100%; top: 50%;}
+	70% {right: 150%; top: 200%;}
+	100% {right: 200%; top: 700%; opacity: 0;}
 }
 
 .ko-player,
@@ -762,10 +650,7 @@
     user-select: none;
 }
 
-.ko-player {
-	left: 5%;
-	right: initial;
-}
+.ko-player {left: 5%; right: initial;}
 
 .star-wars.style-3 .sw-restart {
 	opacity: 1;
@@ -777,6 +662,64 @@
 	50% {opacity: 0;}
 	100% {opacity: 1;}
 }
+
+.locations {display: none;}
+
+.star-wars .locations {
+	display: block;
+	position: fixed;
+	right: 10px;
+	bottom: 10px;
+	width: 100px;
+	height: 100px;
+}
+
+.star-wars .locations-list {
+	display: flex;
+	flex-flow: column;
+}
+
+.star-wars .locations-list li {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	right: 0;
+	bottom: 0;
+	border-radius: 10px;
+	background-color: #999;
+	border: 3px solid #f8f8f8;
+	cursor: pointer;
+}
+
+.star-wars .locations-list .active {z-index: 1;}
+
+.star-wars .locations-list .preview {
+	position: absolute;
+	width: 80%;
+	height: 80%;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	border-radius: 10px;
+	background-size: cover;
+}
+
+.star-wars .locations-list .preview-hoth {background-image: url(../images/hoth.png);}
+.star-wars .locations-list .preview-mustafar {background-image: url(../images/mustafar.png);}
+.star-wars .locations-list .preview-endor {background-image: url(../images/endor.png);}
+.star-wars .locations-list .preview-jakku {
+	background-image: url(../images/jakku.png);
+	background-position: 50%;
+}
+
+.star-wars .locations .mustafar {transition: bottom 350ms;}
+.star-wars .locations .endor {transition: bottom 700ms;}
+.star-wars .locations .jakku {transition: bottom 1050ms;}
+
+.star-wars .locations:hover {height: 430px;}
+.star-wars .locations:hover .mustafar {bottom: 110px;}
+.star-wars .locations:hover .endor {bottom: 220px;}
+.star-wars .locations:hover .jakku {bottom: 330px;}
 
 /*-----------------*/
 /*----Game Menu----*/
@@ -793,20 +736,17 @@
 	cursor: pointer;
 	left: 10px;
 	z-index: 999;
+	color: #000;
 }
 
-.menu.active .btn-menu {
-	border: 0;
-}
+.menu.active .btn-menu {border: 0;}
 
 .btn-menu:hover {
 	background-color: #ddd;
 }
 
 .menu:focus,
-.btn-menu:focus {
-	outline: 0;
-}
+.btn-menu:focus {outline: 0;}
 
 .menu .icon-bar {
 	background-color: #888;
@@ -866,23 +806,17 @@
 }
 
 .game-cc.active,
-.game-cc:hover {
-	box-shadow: 0 0 20px #d60ad6, inset 0 0 10px rgba(255,255,255,0.8);
-}
+.game-cc:hover {box-shadow: 0 0 20px #d60ad6, inset 0 0 10px rgba(255,255,255,0.8);}
 
 .game-sw.active,
-.game-sw:hover {
-	box-shadow: 0 0 20px rgba(0,0,255,0.8), inset 0 0 10px rgba(255,255,255,0.8);
-}
+.game-sw:hover {box-shadow: 0 0 20px rgba(0,0,255,0.8), inset 0 0 10px rgba(255,255,255,0.8);}
 
 .difficulty {
 	display: flex;
 	justify-content: center;
 }
 
-.difficulty .easy {
-	margin-right: 10px;
-}
+.difficulty .easy {margin-right: 10px;}
 
 .difficulty .easy.active,
 .difficulty .easy:hover {
@@ -907,9 +841,7 @@
 	box-shadow: 0 0 20px rgba(0,0,255,0.8), inset 0 0 10px rgba(255,255,255,0.8);
 }
 
-.styles .style-1 {
-	margin-right: 10px;
-}
+.styles .style-1 {margin-right: 10px;}
 
 @media screen and (max-width: 767.98px) {
 	.star-wars .character img,
