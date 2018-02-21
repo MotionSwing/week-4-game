@@ -548,6 +548,42 @@
 	left: -30%;
 }
 
+.star-wars.style-3 .defender-area .char-3 img,
+.star-wars.style-3 .player-area .char-3 img {
+	display: block;
+	background: url(../images/darth_sidious.png) no-repeat;
+    background-size: 75%;
+    width: 190px;
+    height: 165px;
+    padding-left: 190px;
+    border: 0;
+    top: 40%;
+}
+
+.star-wars.style-3 .defender-area .char-3 img {
+	transform: rotateY(180deg);
+}
+
+
+.star-wars.style-3 .player-area .char-4 img,
+.star-wars.style-3 .defender-area .char-4 img {
+	display: block;
+	background: url(../images/darth_maul.png) no-repeat;
+    background-size: 95%;
+    width: 190px;
+    height: 190px;
+    padding-left: 190px;
+    border: 0;
+    right: -17%;
+    top: 51%;
+}
+
+.star-wars.style-3 .player-area .char-4 img {
+	transform: rotateY(180deg);
+	right: initial;
+    left: -20%;
+}
+
 .star-wars.style-3 .player-area .hp,
 .star-wars.style-3 .defender-area .hp,
 .star-wars.style-2 .player-area .hp,
