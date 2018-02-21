@@ -689,6 +689,7 @@
 	background-color: #999;
 	border: 3px solid #f8f8f8;
 	cursor: pointer;
+	overflow: hidden;
 }
 
 .star-wars .locations-list .active {z-index: 1;}
@@ -723,6 +724,28 @@
 
 .hide {display: none;}
 
+.star-wars .locations-list  li:hover::after {
+	content: '';
+    display: block;
+    position: relative;
+    top: 65%;
+    width: 100px;
+    background-color: rgba(0,0,0,.6);
+    text-align: center;
+    color: #fff;
+    animation: spring_label 500ms forwards;
+}
+
+.star-wars .locations-list .hoth:hover::after {content: 'Hoth';}
+.star-wars .locations-list .mustafar:hover::after {content: 'Mustafar';}
+.star-wars .locations-list .endor:hover::after {content: 'Endor';}
+.star-wars .locations-list .jakku:hover::after {content: 'Jakku';}
+
+@keyframes spring_label {
+	0% {top: 120%;}
+	100% {top: 65%;}
+}
+
 /*-----------------*/
 /*----Game Menu----*/
 /*-----------------*/
@@ -743,12 +766,9 @@
 
 .menu.active .btn-menu {border: 0;}
 
-.btn-menu:hover {
-	background-color: #ddd;
-}
+.btn-menu:hover {background-color: #ddd;}
 
-.menu:focus,
-.btn-menu:focus {outline: 0;}
+.menu:focus,.btn-menu:focus {outline: 0;}
 
 .menu .icon-bar {
 	background-color: #888;
@@ -758,9 +778,7 @@
 	border-radius: 1px;
 }
 
-.menu .icon-bar+.icon-bar {
-	margin-top: 4px;
-}
+.menu .icon-bar+.icon-bar {margin-top: 4px;}
 
 .btn-menu {
 	position: relative;

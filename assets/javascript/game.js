@@ -274,8 +274,6 @@ $(document).ready(function() {
 			title = $("<h3>").text("Fight Section");
 			fight_btn = $("<button>").attr('id', 'btn-attack').text('Attack');
 			$("#row-4").append(title, fight_btn);
-
-			// TODO: replace .hide() with a class that sets the display to none
 			$(".star-wars.style-2 #row-4 h3, .star-wars.style-3 #row-4 h3").addClass('hide');
 
 			// Row 5
@@ -344,8 +342,6 @@ $(document).ready(function() {
 				$(".playerDamageText").text("You have been defeated...GAME OVER!!!");
 				$(".defenderDamageText").text('');
 				$("#restart").css('display', 'block').addClass('sw-restart');
-
-				// TODO: replace .hide() with a class that sets the display to none
 				$(".star-wars.style-2 #row-4, .star-wars.style-3 #row-4").addClass('hide');
 			}
 
@@ -353,6 +349,7 @@ $(document).ready(function() {
 			if (defenderHealth <= 0) {
 				starWarsRPG.canFight = false;
 
+				// sounds.death.play();
 				$(".style-3 .defender-area .character").parent().append(ko_text.addClass('ko-defender'));				
 				$(".defender-area .character").remove();
 				$(".playerDamageText").text("You have defeated " + defender + ", you can choose to fight another enemy.");
@@ -363,8 +360,6 @@ $(document).ready(function() {
 					$(".playerDamageText").text("You Won!!!! GAME OVER!!!");
 					$(".defenderDamageText").text('');
 					$("#restart").css('display', 'block').addClass('sw-restart');
-
-					// TODO: replace .hide() with a class that sets the display to none
 					$(".star-wars.style-2 #row-4, .star-wars.style-3 #row-4").addClass('hide');
 				}
 			}
@@ -376,6 +371,7 @@ $(document).ready(function() {
 					if(current_area === "character-list" && $(".player-area .character").length === 0) {
 						$(".style-3 .player-area .ko-player").remove();
 						$(this).appendTo('.player-area');
+						sounds.player_selected.play();
 						$(".character-list").children().addClass('enemy').removeClass('available').appendTo('.enemies-area'); 
 						$(".star-wars.style-2 .character-list, .star-wars.style-3 .character-list").hide();
 						starWarsRPG.baseAttackPower = $(".player-area .character").data("attack-power");
@@ -383,7 +379,7 @@ $(document).ready(function() {
 					}else if (current_area === "enemies-area" && $(".defender-area .character").length === 0) {
 						$(this).appendTo('.defender-area').removeClass('enemy').addClass('defender').removeData('attack-power');
 						$(".style-3 .defender-area .ko-defender").remove();
-
+						sounds.defender_selected.play();
 						starWarsRPG.defenderBaseHP = $(".defender-area .character").data("hp");
 						$(".star-wars.style-2 #row-4, .star-wars.style-3 #row-4").show();
 						starWarsRPG.canFight = true;
@@ -464,16 +460,12 @@ $(document).ready(function() {
 
 		if ($(this).hasClass('style-2')) {
 			$("body").removeClass('style-3').addClass('style-2');
-
-			// TODO: replace .hide() with a class that sets the display to none
 			$(".star-wars.style-2 #row-4 h3").addClass('hide');
 			if($(".player-area").children().length > 0) {
 				$(".star-wars.style-2 .character-list").hide();
 			}
 		}else if($(this).hasClass('style-3')){
 			$("body").removeClass('style-2').addClass('style-3');
-
-			// TODO: replace .hide() with a class that sets the display to none
 			$(".star-wars.style-3 #row-4 h3").addClass('hide');
 			if($(".player-area").children().length > 0) {
 				$(".star-wars.style-3 .character-list").hide();
@@ -517,5 +509,4 @@ $(document).ready(function() {
 	 	});
 	 	return this;
 	 };
-
 });
