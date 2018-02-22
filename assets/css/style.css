@@ -557,7 +557,7 @@
 	position: absolute;
 	border-radius: 2px;
     top: -1px;
-    border: 1px solid #222;
+    border: 1px solid #fff;
     box-shadow: 0 0 7px rgba(0,0,0,0.6), inset 0 0 7px rgba(0,0,0,0.6);
 }
 
