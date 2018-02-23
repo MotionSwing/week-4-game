@@ -91,8 +91,10 @@ $(document).ready(function() {
 		check_score: function(){
 			if(crystalsCollector.player_score === crystalsCollector.randomNum) {
 				crystalsCollector.wins++;
+				sounds.crystal_shower.play();
 				$("#wins").text("Wins: " + crystalsCollector.wins);
 
+				crystalsCollector.crystal_drop(10);
 				crystalsCollector.display_outcome("You won!!");
 				crystalsCollector.change_colors();
 				crystalsCollector.start_game();
@@ -123,8 +125,14 @@ $(document).ready(function() {
 		addListeners: function() {
 			$(".crystals-collector").off().on('click', '.gems li', function(event) {
 				click_count++;
+				sounds.crystal.pause();
+				sounds.crystal.currentTime = 0;
+				sounds.crystal.play();
 				crystalsCollector.player_score += parseInt($(this).attr('data-value'));
-				$("#score").text(crystalsCollector.player_score);
+				$("#score").text(crystalsCollector.player_score).addClass('pop');
+				const el = $("#score");
+				el.before(el.clone(true)).remove();
+
 				crystalsCollector.check_score();
 
 				// Hard Mode - Randomly change the value of two crystals when any crystal 
@@ -151,8 +159,23 @@ $(document).ready(function() {
 			$(".outcome").on('click', 'button', function(event) {
 				$(".outcome").remove();
 			});
+		},
+		crystal_drop: function(count){
+			const gem_count = count || 1;
+			for (var i = 0; i < gem_count; i++) {
+				const gem = $("<div>");
+				gem.addClass('diamond delay-' + Math.floor(Math.random() * 10) + 
+					' spin-dir-' + Math.floor(Math.random() * 2) + 
+					' spin-speed-' + Math.floor(Math.random() * 7));
+				gem.css('left', (Math.floor(Math.random() * 100) + 1) + '%');
+				gem.animate({top: "130%"}, Math.floor(Math.random() * (5000 - 2000)) + 2000, function(){
+					$(this).remove();
+				});
+				$(".container").append(gem);
+			}	
 		}
 	};
+
 
 // --------------
 // Star Wars Game
@@ -163,6 +186,8 @@ $(document).ready(function() {
 		baseAttackPower: 0,
 		playerBaseHP: null,
 		defenderBaseHP: null,
+		deathCounter: 0,
+		bgSound: new Audio(),
 		characters: [
 			{
 				id: "obi",
@@ -335,6 +360,13 @@ $(document).ready(function() {
 			const ko_text = $("<div>").text("Defeated");
 			if (playerHealth <= 0) {
 				starWarsRPG.gameover = true;
+				starWarsRPG.deathCounter++;
+
+				if ($(".player-area .character").is('.char-1') && $(".defender-area .character").is('.char-2')){
+					sounds.force_be_with_you.play();
+				}else if (starWarsRPG.deathCounter > 1) {
+					sounds.yodasTwoCents().play();
+				}
 
 				$(".style-3 .player-area .character").parent().append(ko_text.addClass('ko-player'));				
 				$(".style-3 .player-area .character").remove();
@@ -349,7 +381,10 @@ $(document).ready(function() {
 			if (defenderHealth <= 0) {
 				starWarsRPG.canFight = false;
 
-				// sounds.death.play();
+				if ($(".player-area .character").is('.char-2') && $(".defender-area .character").is('.char-1')){
+					sounds.force_be_with_you.play();
+				}
+
 				$(".style-3 .defender-area .character").parent().append(ko_text.addClass('ko-defender'));				
 				$(".defender-area .character").remove();
 				$(".playerDamageText").text("You have defeated " + defender + ", you can choose to fight another enemy.");
@@ -357,6 +392,7 @@ $(document).ready(function() {
 
 				if($(".enemies-area .character").length === 0) {
 					starWarsRPG.gameover = true;
+					starWarsRPG.deathCounter = 0;
 					$(".playerDamageText").text("You Won!!!! GAME OVER!!!");
 					$(".defenderDamageText").text('');
 					$("#restart").css('display', 'block').addClass('sw-restart');
@@ -379,7 +415,18 @@ $(document).ready(function() {
 					}else if (current_area === "enemies-area" && $(".defender-area .character").length === 0) {
 						$(this).appendTo('.defender-area').removeClass('enemy').addClass('defender').removeData('attack-power');
 						$(".style-3 .defender-area .ko-defender").remove();
-						sounds.defender_selected.play();
+
+						starWarsRPG.bgSound.pause();
+						starWarsRPG.bgSound.currentTime = 0;
+						if($(".player-area .character").hasClass('char-3') && $(".defender-area .character").hasClass('char-2')) {
+							sounds.sidious_v_luke.play();
+						}else if ($(".player-area .character").is('.char-1, .char-4') && $(".defender-area .character").is('.char-1, .char-4')) {
+							starWarsRPG.bgSound = sounds.duel_of_fates;
+							starWarsRPG.bgSound.play();
+						}else {
+							sounds.defender_selected.play();
+						}
+
 						starWarsRPG.defenderBaseHP = $(".defender-area .character").data("hp");
 						$(".star-wars.style-2 #row-4, .star-wars.style-3 #row-4").show();
 						starWarsRPG.canFight = true;
@@ -401,6 +448,8 @@ $(document).ready(function() {
 				}
 			}).on('click', '#restart', function(event) {
 				if(starWarsRPG.gameover) {
+					starWarsRPG.bgSound.pause();
+					starWarsRPG.bgSound.currentTime = 0;
 					starWarsRPG.restart_game();	
 				}
 			});

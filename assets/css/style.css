@@ -2,9 +2,9 @@
 /*----CrystalsCollector----*/
 /*-------------------------*/
 
-.crystals-collector {
-	background-image: url(../images/spiration-light.png);
-}
+body {overflow-x: hidden;}
+
+.crystals-collector {background-image: url(../images/spiration-light.png);}
 
 .crystals-collector h1 {
 	background-color: #fff;
@@ -34,23 +34,10 @@
 	cursor: pointer;
 }
 
-#option-1 {
-    background-position: 0 -12px;
-}
-
-#option-2 {
-	background-position: -63px -13px;
-}
-
-#option-3 {
-	background-position: -2px -81px;
-}
-
-#option-4 {
-	background-position: -129px -10px;
-    min-width: 57px;
-    width: 57px;
-}
+#option-1 {background-position: 0 -12px;}
+#option-2 {background-position: -63px -13px;}
+#option-3 {background-position: -2px -81px;}
+#option-4 {background-position: -129px -10px; min-width: 57px; width: 57px;}
 
 #option-1:hover,
 #option-2:hover,
@@ -69,14 +56,16 @@
 	100% { transform: scale(1.2); }
 }
 
-#gem-card {
-	background-color: #fff;
-}
+#gem-card {background-color: #fff;}
 
-#target-number,
-#score,
-#record {
-	font-size: 25px;
+#target-number, #score, #record {font-size: 25px;}
+
+#score.pop {animation: pop 500ms;}
+
+@keyframes pop {
+	0% {font-size: 40px; line-height: 1;}
+	50% {line-height: 1.25;}
+	100% {line-height: 1.5;}
 }
 
 .hide-show {
@@ -89,20 +78,19 @@
 	overflow: hidden;
 }
 
-.hide-show:hover {
-	/*box-shadow: 0 0 10px rgba(0,0,0,0.6), inset 0 0 10px rgba(0,0,0,0.6); */
-	box-shadow: 0 0 10px rgba(0,0,0,0.6);
-	/*color: #777;*/
-}
+.hide-show:hover {box-shadow: 0 0 10px rgba(0,0,0,0.6);}
 
+.btn-menu:hover::after,
 .hide-show:hover::after {
 	content: '';
 	position: absolute;
-	width: 115%;
+	width: 200%;
 	height: 100%;
 	background: linear-gradient(-8deg, transparent 0%, rgba(255,255,255,0.8) 50%, transparent 100%);
 	right: -5px;
+	right: -11%;
 	top: 2px;
+	top: 7%;
 	transform: rotate(-30deg);
 	animation: move_shine 700ms forwards;
 }
@@ -160,6 +148,68 @@
 .crystals-collector h2:last-of-type,
 .crystals-collector .styles {
 	display: none;
+}
+
+.diamond {
+	position: absolute;
+	top: -50%;
+	left: 10%;
+	border-style: solid;
+	border-color: transparent transparent rgba(0,0,255,0.5) transparent;
+	border-width: 0 25px 25px 25px;
+	height: 0;
+	width: 100px;
+	margin: 20px 0 50px 0;
+	animation: spin 2s linear infinite;
+}
+
+.diamond::after {
+	content: '';
+	position: absolute;
+	top: 25px;
+	left: -25px;
+	width: 0;
+	height: 0;
+	border-style: solid;
+	border-color: rgba(0,123,255,0.5) transparent transparent transparent;
+	border-width: 70px 50px 0 50px;
+}
+
+@keyframes spin {
+	0% {transform: rotate(0deg);}
+	100% {transform: rotate(360deg);}
+}
+
+.delay-0 { animation-delay: initial; }
+.delay-1 { animation-delay: 200ms; }
+.delay-2 { animation-delay: 300ms; }
+.delay-3 { animation-delay: 400ms; }
+.delay-4 { animation-delay: 500ms; }
+.delay-5 { animation-delay: 600ms; }
+.delay-6 { animation-delay: 700ms; }
+.delay-7 { animation-delay: 800ms; }
+.delay-8 { animation-delay: 900ms; }
+.delay-9 { animation-delay: 1000ms; }
+
+.spin-dir-0 {animation-name: spin_clockwise;}
+.spin-dir-1 {animation-name: spin_counter;}
+
+.spin-speed-0 {animation-duration: 2000ms;}
+.spin-speed-1 {animation-duration: 2500ms;}
+.spin-speed-2 {animation-duration: 3000ms;}
+.spin-speed-3 {animation-duration: 3500ms;}
+.spin-speed-4 {animation-duration: 4000ms;}
+.spin-speed-5 {animation-duration: 4500ms;}
+.spin-speed-6 {animation-duration: 5000ms;}
+
+@keyframes spin_clockwise {
+	0% {transform: rotate(0deg);}
+	100% {transform: rotate(360deg);}
+}
+
+@keyframes spin_counter {
+	0% {transform: rotate(360deg);}
+	100% {transform: rotate(0deg);}
 }
 
 /*-------------------*/
@@ -789,6 +839,7 @@
 	background-color: #f8f8f8;
 	border: 1px solid #aaa;
 	cursor: pointer;
+	overflow: hidden;
 }
 
 .menu.active {	
