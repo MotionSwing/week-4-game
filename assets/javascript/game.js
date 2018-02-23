@@ -225,7 +225,7 @@ $(document).ready(function() {
 			let title = $("<h1>").text("Star Wars RPG!");
 			let char_list = $("<ul>").addClass('character-list');
 
-			for (let i = 0; i < starWarsRPG.characters.length; i++) {
+			for (var i = 0; i < starWarsRPG.characters.length; i++) {
 				const char = $("<li>").attr("id", starWarsRPG.characters[i].id).addClass('character char-' + (i + 1) + ' available');
 				char.data({
 					hp: starWarsRPG.characters[i].base_hp,
@@ -406,7 +406,7 @@ $(document).ready(function() {
 			});
 		},
 		generate_attack_values: function() {
-			for (let i = 0; i < starWarsRPG.characters.length; i++) {
+			for (var i = 0; i < starWarsRPG.characters.length; i++) {
 				const char = $(".char-" + (i + 1));
 				char.data({
 					"attack-power": Math.floor(Math.random() * (15 - 5)) + 5,
@@ -415,7 +415,7 @@ $(document).ready(function() {
 			}
 		},
 		reset_attack_values: function() {
-			for (let i = 0; i < starWarsRPG.characters.length; i++) {
+			for (var i = 0; i < starWarsRPG.characters.length; i++) {
 				const char = $(".char-" + (i + 1));
 				char.data({
 					"attack-power": starWarsRPG.characters[i].base_attack,
@@ -431,7 +431,7 @@ $(document).ready(function() {
 	$(".menu").on('click', '.btn-menu', function() {
 		if (!menu_expanded) {
 			$(".menu").animate({width: '210px', height: '290px'}, 350).addClass('active');
-			$(".menu-right").fadeIn('slow').css('display', 'flex');
+			$(".menu-right").fadeIn(1400).css('display', 'flex');
 			menu_expanded = true;
 		}else {
 			closeMenu();
@@ -482,25 +482,23 @@ $(document).ready(function() {
 		menu_expanded = false;
 	}
 
-	 $(".locations").on('click', '.hoth', function(event) {
-	 	$("body").removeClassPrefix("bg-").addClass('bg-hoth');
-	 	$(".locations li").removeClass('active');
-	 	$(this).addClass('active');
-	 }).on('click', '.mustafar', function(event) {
-	 	$("body").removeClassPrefix("bg-").addClass('bg-mustafar');
-	 	$(".locations li").removeClass('active');
-	 	$(this).addClass('active');
-	 }).on('click', '.endor', function(event) {
-	 	$("body").removeClassPrefix("bg-").addClass('bg-endor');
-	 	$(".locations li").removeClass('active');
-	 	$(this).addClass('active');
-	 }).on('click', '.jakku', function(event) {
-	 	$("body").removeClassPrefix("bg-").addClass('bg-jakku');
-	 	$(".locations li").removeClass('active');
-	 	$(this).addClass('active');
-	 });;
+	 $(".locations").on('click', '.hoth', function() {
+	 	applyBackground('bg-hoth');
+	 }).on('click', '.mustafar', function() {
+	 	applyBackground('bg-mustafar');
+	 }).on('click', '.endor', function() {
+	 	applyBackground('bg-endor');
+	 }).on('click', '.jakku', function() {
+	 	applyBackground('bg-jakku');
+	 });
 
-	 $.fn.removeClassPrefix = function(prefix) {
+	 function applyBackground(cl) {
+	 	$("body").removeClassWithPrefix("bg-").addClass(cl);
+	 	$(".locations li").removeClass('active');
+	 	$(this).addClass('active');
+	 };
+
+	 $.fn.removeClassWithPrefix = function(prefix) {
 	 	this.each(function(i, el) {
 	 		const classes = el.className.split(" ").filter(function(c) {
 	 			return c.lastIndexOf(prefix, 0) !== 0;
