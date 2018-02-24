@@ -248,7 +248,11 @@ body {overflow-x: hidden;}
 .star-wars.bg-jakku {
 	background: url(../images/sw-bg-2.jpg) no-repeat center center fixed;
 	background-size: cover;
+	color: #fff;
 }
+
+.star-wars.bg-jakku h1, .star-wars.bg-jakku h3 {text-shadow: 0 0 1px #000, 0 0 1px #000;}
+.star-wars.bg-jakku p {color: #000;}
 
 .star-wars .container {
 	max-width: 100%;

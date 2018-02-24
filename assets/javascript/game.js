@@ -537,19 +537,19 @@ $(document).ready(function() {
 	}
 
 	 $(".locations").on('click', '.hoth', function() {
-	 	applyBackground('bg-hoth');
+	 	applyBackground($(this), 'bg-hoth');
 	 }).on('click', '.mustafar', function() {
-	 	applyBackground('bg-mustafar');
+	 	applyBackground($(this), 'bg-mustafar');
 	 }).on('click', '.endor', function() {
-	 	applyBackground('bg-endor');
+	 	applyBackground($(this), 'bg-endor');
 	 }).on('click', '.jakku', function() {
-	 	applyBackground('bg-jakku');
+	 	applyBackground($(this), 'bg-jakku');
 	 });
 
-	 function applyBackground(cl) {
-	 	$("body").removeClassWithPrefix("bg-").addClass(cl);
+	 function applyBackground(el,c) {
+	 	$("body").removeClassWithPrefix("bg-").addClass(c);
 	 	$(".locations li").removeClass('active');
-	 	$(this).addClass('active');
+	 	el.addClass('active');
 	 };
 
 	 $.fn.removeClassWithPrefix = function(prefix) {
