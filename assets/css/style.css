@@ -831,8 +831,6 @@ body {overflow-x: hidden;}
 
 }
 
-.lightsaber:hover::after {width: 200px; opacity: 1;}
-
 .lightsaber.style-a {
 	left: 40%;
 	background-color: #000;
@@ -841,7 +839,7 @@ body {overflow-x: hidden;}
     background-size: 40%;
     background-position: 72%;
     transform: rotate(-45deg);
-    animation: ls_drop_a 2s alternate 2 forwards
+    animation: ls_drop_a 2s alternate 2 forwards;
 }
 
 .lightsaber.style-b {
@@ -850,7 +848,8 @@ body {overflow-x: hidden;}
     background-image: radial-gradient(circle at 50% 50%, #000 50%, transparent 50%);
     background-size: 10%;
     transform: rotate(-135deg);
-    animation: ls_drop_b 2s 200ms alternate 2 forwards
+    opacity: 0;
+    animation: ls_drop_b 2s 200ms alternate 2 forwards;
 }
 
 .lightsaber.color-a::after {
@@ -872,20 +871,20 @@ body {overflow-x: hidden;}
 }
 
 @keyframes ls_blade_a {
-	50% {opacity: 0;}
+	0%,50% {opacity: 0;}
 	100% {opacity: 1; width: 200px;}
 }
 
 @keyframes ls_drop_b {
-	0% {bottom: 110%; transform: rotate(-90deg);}
-	20% {bottom: 30%;}
-	30% {bottom: 40%;}
-	40% {transform: rotate(-90deg);}
-	50%, 100% {bottom: 40%;	transform: rotate(-135deg);}
+	0% {opacity: 1; bottom: 110%; transform: rotate(-90deg);}
+	20% {opacity: 1; bottom: 30%;}
+	30% {opacity: 1; bottom: 40%;}
+	40% {opacity: 1; transform: rotate(-90deg);}
+	50%, 100% {opacity: 1; bottom: 40%;	transform: rotate(-135deg);}
 }
 
 @keyframes ls_blade_b {
-	50% {opacity: 0;}
+	0%,50% {opacity: 0;}
 	100% {opacity: 1; width: 200px;}
 }
 
