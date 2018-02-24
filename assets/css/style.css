@@ -796,6 +796,99 @@ body {overflow-x: hidden;}
 	100% {top: 65%;}
 }
 
+.lightsaber {
+    position: absolute;
+    bottom: 50px;
+    width: 40px;
+    height: 10px;
+    border-radius: 5px;
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+
+.lightsaber::before {
+    content: '';
+    position: absolute;
+    left: 92%;
+    height: 150%;
+    width: 2px;
+    border: 2px solid #000;
+    top: -25%;
+}
+
+.lightsaber::after {
+	content: '';
+	position: absolute;
+	left: 104%;
+	height: 100%;
+	width: 0;
+	background-color: #fff;
+	border-radius: 	5px;
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+	transition: width 1s;
+	opacity: 0;
+
+}
+
+.lightsaber:hover::after {width: 200px; opacity: 1;}
+
+.lightsaber.style-a {
+	left: 40%;
+	background-color: #000;
+    background-repeat: no-repeat;
+    background-image: radial-gradient(circle at 50% 50%, #ccc 50%, transparent 50%);
+    background-size: 40%;
+    background-position: 72%;
+    transform: rotate(-45deg);
+    animation: ls_drop_a 2s alternate 2 forwards
+}
+
+.lightsaber.style-b {
+    right: 40%;
+	background-color: #777;
+    background-image: radial-gradient(circle at 50% 50%, #000 50%, transparent 50%);
+    background-size: 10%;
+    transform: rotate(-135deg);
+    animation: ls_drop_b 2s 200ms alternate 2 forwards
+}
+
+.lightsaber.color-a::after {
+	box-shadow: 0 0 20px 10px rgba(0,255,0,0.9);
+	animation: ls_blade_a 2s alternate 2 forwards;
+}
+
+.lightsaber.color-b::after {
+	box-shadow: 0 0 20px 10px rgba(255,0,0,0.9);
+	animation: ls_blade_b 2s alternate 2 forwards;
+}
+
+@keyframes ls_drop_a {
+	0% {bottom: 110%; transform: rotate(-90deg);}
+	20% {bottom: 30%;}
+	30% {bottom: 40%;}
+	40% {transform: rotate(-90deg);}
+	50%, 100% {bottom: 40%;	transform: rotate(-45deg);}
+}
+
+@keyframes ls_blade_a {
+	50% {opacity: 0;}
+	100% {opacity: 1; width: 200px;}
+}
+
+@keyframes ls_drop_b {
+	0% {bottom: 110%; transform: rotate(-90deg);}
+	20% {bottom: 30%;}
+	30% {bottom: 40%;}
+	40% {transform: rotate(-90deg);}
+	50%, 100% {bottom: 40%;	transform: rotate(-135deg);}
+}
+
+@keyframes ls_blade_b {
+	50% {opacity: 0;}
+	100% {opacity: 1; width: 200px;}
+}
+
 /*-----------------*/
 /*----Game Menu----*/
 /*-----------------*/

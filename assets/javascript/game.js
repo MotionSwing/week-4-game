@@ -418,7 +418,7 @@ $(document).ready(function() {
 
 						starWarsRPG.bgSound.pause();
 						starWarsRPG.bgSound.currentTime = 0;
-						if($(".player-area .character").hasClass('char-3') && $(".defender-area .character").hasClass('char-2')) {
+						if($(".player-area .character").is('.char-2, .char-3') && $(".defender-area .character").is('.char-2, .char-3')) {
 							sounds.sidious_v_luke.play();
 						}else if ($(".player-area .character").is('.char-1, .char-4') && $(".defender-area .character").is('.char-1, .char-4')) {
 							starWarsRPG.bgSound = sounds.duel_of_fates;
@@ -427,6 +427,10 @@ $(document).ready(function() {
 							sounds.defender_selected.play();
 						}
 
+						const saber_a = $("<div>").addClass('lightsaber style-a color-a');
+						const saber_b = $("<div>").addClass('lightsaber style-b color-b');
+						$(".star-wars.style-2, .star-wars.style-3").append(saber_a, saber_b);
+
 						starWarsRPG.defenderBaseHP = $(".defender-area .character").data("hp");
 						$(".star-wars.style-2 #row-4, .star-wars.style-3 #row-4").show();
 						starWarsRPG.canFight = true;
@@ -434,6 +438,7 @@ $(document).ready(function() {
 					}
 				}
 			}).on('click', '#btn-attack', function(event) {
+				$(".lightsaber").remove();
 				if(!starWarsRPG.gameover && starWarsRPG.canFight) {
 					const defenderName = $(".defender-area .name").text();
 					starWarsRPG.player_attack(defenderName);
