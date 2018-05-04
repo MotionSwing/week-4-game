@@ -176,7 +176,6 @@ $(document).ready(function() {
 		}
 	};
 
-
 // --------------
 // Star Wars Game
 // --------------

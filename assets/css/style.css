@@ -4,6 +4,24 @@
 
 body {overflow-x: hidden;}
 
+footer {
+	position: fixed;
+	font-weight: 800;
+	left: 10px;
+	bottom: 10px;
+	background-color: #fff;
+	padding: 5px;
+	border-radius: 5px;
+	border: 1px solid #000;
+	font-family: initial;
+}
+footer:hover {transform: scale(1.1); box-shadow: 2px 2px 10px rgba(0,0,0,0.8);}
+footer a {text-decoration: none; color: #000;}
+footer a:hover {
+	text-decoration: none;
+	color: #000;
+}
+
 .crystals-collector {background-image: url(../images/spiration-light.png);}
 
 .crystals-collector h1 {
@@ -1009,5 +1027,20 @@ body {overflow-x: hidden;}
 	.star-wars .character img {
 		width: 80px;
     	height: 40px;
+	}
+
+	.star-wars.style-2 .defender-area .progress,
+	.star-wars.style-2 .player-area .progress {
+		width: 80px;
+	    height: 10px;
+	    font-size: 8px;
+	}
+
+	.star-wars.style-2 .defender-area .character {
+		top: 80px;
+	}
+
+	.star-wars.style-3 .defender-area .char-2 img {
+		right: -60%;
 	}
 }
