@@ -238,9 +238,9 @@ $(document).ready(function() {
 			$(document).attr('title', 'Star Wars RPG Game');
 
 			if($("body").hasClass('crystals-collector')) {
-				$("body").removeClass('crystals-collector').addClass('star-wars bg-hoth');
+				$("body").removeClass('crystals-collector').addClass('star-wars bg-hoth style-3');
 			}else {
-				$("body").addClass('star-wars bg-hoth');
+				$("body").addClass('star-wars bg-hoth style-3');
 			}
 			
 
