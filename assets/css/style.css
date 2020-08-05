@@ -376,15 +376,11 @@ footer a:hover {
 .star-wars.style-3 #row-3,
 .star-wars.style-2 #row-3 {
     position: absolute;
-    bottom: -37%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     transition: bottom 200ms 200ms linear;
 }
-
-.star-wars.style-3 #row-3:hover,
-.star-wars.style-2 #row-3:hover {bottom: -18%;}
 
 .star-wars.style-3 #row-4,
 .star-wars.style-2 #row-4 {
