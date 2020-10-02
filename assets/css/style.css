@@ -543,6 +543,7 @@ footer a:hover {
 	height: 150px; /* Height of new image */
 	padding-left: 190px; /* Equal to width of new image*/ 	
 	border: 0;
+	margin-top: 150px;
 }
 
 .star-wars.style-3 .defender-area .char-1 img {transform: rotateY(180deg);}
@@ -557,7 +558,8 @@ footer a:hover {
     padding-left: 190px;
     border: 0;
     right: -26%;
-    top: 45%;
+	top: 45%;
+	margin-top: 150px;
 }
 
 .star-wars.style-3 .player-area .char-2 img {
@@ -575,7 +577,8 @@ footer a:hover {
     height: 165px;
     padding-left: 190px;
     border: 0;
-    top: 40%;
+	top: 40%;
+	margin-top: 150px;
 }
 
 .star-wars.style-3 .defender-area .char-3 img {transform: rotateY(180deg);}
@@ -591,7 +594,8 @@ footer a:hover {
     padding-left: 190px;
     border: 0;
     right: -17%;
-    top: 51%;
+	top: 51%;
+	margin-top: 150px;
 }
 
 .star-wars.style-3 .player-area .char-4 img {
